@@ -3,9 +3,22 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimary">@color/colorFondoActionBar</item>
+        <item name="colorPrimaryDark">@color/colorFondoActionBar</item>
+        <item name="colorAccent">@color/colorFondoActionBar</item>
+        <item name="actionModeBackground">@color/colorFondoActionBar</item>
+        <item name="colorBackgroundFloating">@color/colorFondoActionBar</item>
+        <item name="color">@color/colorFondoActionBar</item>
+    </style>
+
+    <style name="AppThemeSmarte" parent="Theme.AppCompat">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorFondoActionBar</item>
+        <item name="colorPrimaryDark">@color/colorFondoActionBar</item>
+        <item name="colorAccent">@color/colorFondoActionBar</item>
+        <item name="actionModeBackground">@color/colorFondoActionBar</item>
+        <item name="colorBackgroundFloating">@color/colorFondoActionBar</item>
+        <item name="color">@color/colorFondoActionBar</item>
     </style>
 
 </resources>

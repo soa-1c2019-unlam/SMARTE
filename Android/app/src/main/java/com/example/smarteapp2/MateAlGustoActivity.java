@@ -48,10 +48,9 @@ public class MateAlGustoActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 databaseReference.child("servoAzucar").setValue(1);
+                databaseReference.child("cantAzucar").setValue(1);
             }
         });
-
-
     }
 
     private void inicializarFirebase() {

@@ -33,7 +33,6 @@ public class ConfigurarPerfiles extends AppCompatActivity {
 
     ListView listaPerfiles;
     EditText txtNombre;
-    EditText txtYerba;
     EditText txtAzucar;
 
     FirebaseDatabase firebaseDataBase;
@@ -49,7 +48,6 @@ public class ConfigurarPerfiles extends AppCompatActivity {
 
         listaPerfiles = findViewById(R.id.listaDePerfiles);
         txtAzucar = findViewById(R.id.azucarEditText);
-        txtYerba = findViewById(R.id.yerbaEditText);
         txtNombre = findViewById(R.id.nombreEditText);
 
         inicializarFirebase();
@@ -62,7 +60,6 @@ public class ConfigurarPerfiles extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 perfilSeleccionado = (Perfil) parent.getItemAtPosition(position);
                 txtNombre.setText(perfilSeleccionado.getNombre());
-                txtYerba.setText(perfilSeleccionado.getYerba());
                 txtAzucar.setText(perfilSeleccionado.getAzucar());
             }
         });
@@ -77,8 +74,7 @@ public class ConfigurarPerfiles extends AppCompatActivity {
                 for (DataSnapshot objSnapShot : dataSnapshot.getChildren()){
                     Perfil p = objSnapShot.getValue(Perfil.class);
                     perfilList.add(p);
-
-                    arrayAdapterPerfil = new ArrayAdapter<Perfil>(ConfigurarPerfiles.this, android.R.layout.simple_list_item_1, perfilList);
+                    arrayAdapterPerfil = new CustomListAdaptar(ConfigurarPerfiles.this, R.layout.activity_custom_list_adaptar, perfilList);
                     listaPerfiles.setAdapter(arrayAdapterPerfil);
                 }
             }
@@ -106,7 +102,6 @@ public class ConfigurarPerfiles extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item){
 
         String nombre = txtNombre.getText().toString();
-        String yerba = txtYerba.getText().toString();
         String azucar = txtAzucar.getText().toString();
 
 
@@ -115,9 +110,6 @@ public class ConfigurarPerfiles extends AppCompatActivity {
                 if (nombre.equals("")){
                     mensajeRequerido(txtNombre);
                 }
-                else if (yerba.equals("")){
-                    mensajeRequerido(txtYerba);
-                }
                 else if (azucar.equals("")){
                     mensajeRequerido(txtAzucar);
                 }
@@ -125,7 +117,6 @@ public class ConfigurarPerfiles extends AppCompatActivity {
                     Perfil perfil = new Perfil();
                     perfil.setId(UUID.randomUUID().toString());
                     perfil.setNombre(nombre);
-                    perfil.setYerba(yerba);
                     perfil.setAzucar(azucar);
 
                     databaseReference.child("Perfiles").child(perfil.getId()).setValue(perfil);
@@ -136,15 +127,10 @@ public class ConfigurarPerfiles extends AppCompatActivity {
 
                 break;
             }
-            case R.id.icon_edit: {
-                Toast.makeText(this,"Editar perfil", Toast.LENGTH_LONG).show();
-                break;
-            }
             case R.id.icon_save: {
                 Perfil p = new Perfil();
                 p.setId(perfilSeleccionado.getId());
                 p.setNombre(nombre);
-                p.setYerba(yerba);
                 p.setAzucar(azucar);
 
                 databaseReference.child("Perfiles").child(p.getId()).setValue(p);
@@ -153,7 +139,11 @@ public class ConfigurarPerfiles extends AppCompatActivity {
                 break;
             }
             case R.id.icon_delete: {
+                Perfil p = new Perfil();
+                p.setId(perfilSeleccionado.getId());
+                databaseReference.child("Perfiles").child(p.getId()).removeValue();
                 Toast.makeText(this,"Perfil eliminado", Toast.LENGTH_LONG).show();
+                LimpiarTextBox();
                 break;
             }
         }
@@ -168,6 +158,5 @@ public class ConfigurarPerfiles extends AppCompatActivity {
     private void LimpiarTextBox (){
         txtNombre.setText("");
         txtAzucar.setText("");
-        txtYerba.setText("");
     }
 }

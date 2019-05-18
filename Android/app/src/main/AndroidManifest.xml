@@ -6,16 +6,19 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
-        android:usesCleartextTraffic="true"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
+        android:label=""
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+        android:usesCleartextTraffic="true">
+        <activity android:name=".CustomListAdaptar"></activity>
+        <activity android:name=".CustomListView" />
         <activity android:name=".IniciarPerfiles" />
         <activity android:name=".ProgramarHorarios" />
-        <activity android:name=".ConfigurarPerfiles" />
+        <activity android:name=".ConfigurarPerfiles"
+            android:theme="@style/AppThemeSmarte"/>
         <activity android:name=".MateAlGustoActivity" />
         <activity android:name=".IniciarCebador" />
         <activity android:name=".MainActivity">

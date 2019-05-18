@@ -16,20 +16,26 @@
             android:id="@+id/tipoTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="100px"
             android:text="Seleccione tipo de mate"
-            android:textSize="30sp"
-            android:textAlignment="center"/>
+            android:textAlignment="center"
+            android:textColor="#000000"
+            android:textSize="30sp" />
 
         <Button
             android:id="@+id/opcionPerfilesButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="70px"
+            android:background="@android:drawable/toast_frame"
             android:text="perfiles" />
 
         <Button
             android:id="@+id/customButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10px"
+            android:background="@android:drawable/toast_frame"
             android:text="A gusto" />
     </LinearLayout>
 

@@ -47,6 +47,6 @@ public class Perfil {
 
     @Override
     public String toString(){
-        return nombre+" | "+yerba+"% de yerba "+" | "+ azucar + " cucharadas de azucar";
+        return nombre+" | "+ azucar + " de azúcar";
     }
 }
