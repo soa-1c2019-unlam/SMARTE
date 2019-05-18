@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "178430238346",
+    "firebase_url": "https://smarteapp2.firebaseio.com",
+    "project_id": "smarteapp2",
+    "storage_bucket": "smarteapp2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:178430238346:android:619a0581eaa063cf",
+        "android_client_info": {
+          "package_name": "com.example.smarteapp2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "178430238346-evl938esqn9gssa38fthn30fc1npqhr2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.smarteapp2",
+            "certificate_hash": "afeae60b9397473a577a088848059824a1711b36"
+          }
+        },
+        {
+          "client_id": "178430238346-rdfdvs91vlanhapjegkjnfqequ700h2v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB3eHJpqLcdnn3KECBHup5CHaBUfzne4kg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "178430238346-rdfdvs91vlanhapjegkjnfqequ700h2v.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
