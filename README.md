@@ -7,4 +7,3 @@
 * Cruz, Pablo Martin. DNI: 34.834.485
 * Lima, Maximiliano.  DNI: 38.401.095
 * Tomaino, Matias.    DNI: 37.243.228
-* Veljacic, Lucas.    DNI: 26.816.082
