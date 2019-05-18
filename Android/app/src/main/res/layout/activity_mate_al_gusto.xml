@@ -9,26 +9,42 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@drawable/fondoazul"
         android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50px"
+            android:text="Seleccione lo que desea colocar en el mate"
+            android:textAlignment="center"
+            android:textSize="24sp"
+            android:textStyle="bold" />
 
         <Button
             android:id="@+id/yerbaButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="450px"
-            android:text="Colocar yerba" />
+            android:layout_marginTop="100px"
+            android:background="@android:drawable/toast_frame"
+            android:text="Yerba" />
 
         <Button
             android:id="@+id/azucarButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Colocar azucar" />
+            android:layout_marginTop="10px"
+            android:background="@android:drawable/toast_frame"
+            android:text="Azucar" />
 
         <Button
             android:id="@+id/colocarAguaButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Colocar agua" />
+            android:layout_marginTop="10px"
+            android:background="@android:drawable/toast_frame"
+            android:text="Agua" />
 
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>
