@@ -8,17 +8,20 @@
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label=""
+        android:label="sMArTE"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         android:usesCleartextTraffic="true">
-        <activity android:name=".CustomListAdaptar"></activity>
+        <activity android:name=".pickersActivity"></activity>
+        <activity android:name=".CustomListAdaptar" />
         <activity android:name=".CustomListView" />
         <activity android:name=".IniciarPerfiles" />
         <activity android:name=".ProgramarHorarios" />
-        <activity android:name=".ConfigurarPerfiles"
-            android:theme="@style/AppThemeSmarte"/>
+        <activity
+            android:name=".ConfigurarPerfiles"
+            android:label=""
+            android:theme="@style/AppThemeSmarte" />
         <activity android:name=".MateAlGustoActivity" />
         <activity android:name=".IniciarCebador" />
         <activity android:name=".MainActivity">

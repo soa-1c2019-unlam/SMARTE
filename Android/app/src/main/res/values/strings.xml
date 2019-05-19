@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">SmarteApp2</string>
+    <string name="titlulo_pickers">Obtener hora</string>
+    <string name="formato_hora">hh:mm</string>
 </resources>
