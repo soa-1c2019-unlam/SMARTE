@@ -6,6 +6,8 @@ int readline();
 void atenderYerba();
 void atenderAzucar();
 long readUltrasonicDistance();
+void espera();
+void esperaMicros();
 
 /////////Variables globales/////////
 SoftwareSerial mySerial(3,2);
@@ -78,7 +80,7 @@ int readline(int readch, char *buffer, int len) {
 
 void atenderYerba(){
   servo.write(posServoYerba);
-  delay(800);
+  espera(800);
   servo.write(0);
   mySerial.println("servoYerba/OFF");
 }
@@ -91,12 +93,30 @@ long readUltrasonicDistance(){
 
   long duration, distance;
   digitalWrite(triggerPin, HIGH);
-  delayMicroseconds(500);
+  esperaMicros(500);
   digitalWrite(triggerPin, LOW);
   duration = pulseIn(echoPin,HIGH);
   distance = (duration/2)/29.4;
-  delayMicroseconds(100);
+  esperaMicros(100);
   return distance;
+}
+
+void espera(long tiempo){
+  long ini = millis();
+
+  while((millis()-ini) <= tiempo){
+
+    //rutinas de atencion que necesitemos
+  }
+}
+
+void esperaMicros(long tiempo){
+  long ini = micros();
+
+  while((micros()-ini) <= tiempo){
+
+    //rutinas de atencion que necesitemos
+  }
 }
 
 // cosas que estaban dentro del loop pero me dio cosa borrar
