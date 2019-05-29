@@ -11,9 +11,7 @@ IPAddress subnet(255,255,255,0);
 #define FIREBASE_HOST "smarteapp2.firebaseio.com"
 #define FIREBASE_AUTH "CldLG68wPna2ZMU9AhfYq4ruMfghQpSGcP0Qx38T"
 
-int salida1 = 2;
-int salida2 = 0;
-int led1 = 10;
+int espera();
 
 void setup()
 {
@@ -48,10 +46,26 @@ void loop()
   
   if(Firebase.getInt("servoAzucar"))
   {
-    Serial.println("servoAzucar/1");
-    delay(1000);
-    Firebase.setInt("servoAzucar",0);
+    int cantAzucar = Firebase.getInt("cantAzucar");
+    Serial.print("servoAzucar/");
+    Serial.println(cantAzucar);
+    delay(500);
+    String txt = Serial.readString();
+    if(txt.indexOf("servoAzucar/OFF")>-1){
+      Firebase.setInt("servoAzucar",0);  
+    }
   }
+
+  if(Firebase.getInt("bomba"))
+  {
+    Serial.println("bomba/1");
+    delay(500);
+    String txt = Serial.readString();
+    if(txt.indexOf("bomba/OFF")>-1){
+      Firebase.setInt("bomba",0);  
+    }
+  }
+
   
   if (Firebase.failed()) {    
     Serial.print("Failed communicating to Firebase");    
@@ -59,5 +73,14 @@ void loop()
     return;
   }
 
-  delay(1000);
+  delay(800);
+}
+
+void espera(long tiempo){
+  long ini = millis();
+
+  while((millis()-ini) <= tiempo){
+
+    //rutinas de atencion que necesitemos
+  }
 }

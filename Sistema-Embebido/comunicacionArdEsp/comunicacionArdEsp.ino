@@ -5,6 +5,7 @@
 int readline();
 void atenderYerba();
 void atenderAzucar();
+void atenderBomba();
 long readUltrasonicDistance();
 void espera();
 void esperaMicros();
@@ -12,7 +13,9 @@ void esperaMicros();
 /////////Variables globales/////////
 SoftwareSerial mySerial(3,2);
 Servo servo;
-int posServoYerba = 80;
+Servo servo2;
+int posServoYerba = 120;
+int posServoAzucar = 80;
 char buf[80];
 int triggerPin = 10;
 int echoPin = 9;
@@ -24,31 +27,32 @@ void setup() {
   pinMode(13, OUTPUT);
   servo.attach(11);
   servo.write(0);
+  servo2.attach(12);
+  servo2.write(0);
   pinMode(13,OUTPUT);
   digitalWrite(13,LOW);
   pinMode(triggerPin,OUTPUT);
   pinMode(echoPin,INPUT);
+  pinMode(8,OUTPUT);
 }
 
 void loop() {
   
-  //Serial.println(cm);
   while(mySerial.available()){
     if(readline(mySerial.read(),buf,80)>0){
       String str((char*)buf);
 
-      long cm = readUltrasonicDistance();
-      if( cm < 10){
-        Serial.println(cm);
-        if(str.equals("servoYerba/1")){
-          Serial.println(str);
-          atenderYerba();
-        }
-        if(str.equals("servoAzucar/1")){
-          atenderAzucar();
-        }
-      }else {
-        digitalWrite(13,LOW);
+      if(str.equals("servoYerba/1")){
+        atenderYerba();
+      }
+      
+      if(str.indexOf("servoAzucar/")>=0){
+        int cant = str.substring(12,13).toInt();
+        atenderAzucar(cant);
+      }
+      
+      if(str.equals("bomba/1")){
+        atenderBomba();
       }
       
     }
@@ -79,26 +83,50 @@ int readline(int readch, char *buffer, int len) {
 }
 
 void atenderYerba(){
-  servo.write(posServoYerba);
-  espera(800);
-  servo.write(0);
+  long cm = readUltrasonicDistance();
+  Serial.print("centimetros: ");
+  Serial.println(cm);
+  if(cm<=10){
+    servo.write(posServoYerba);
+    espera(800);
+    servo.write(0);
+    espera(200);
+    
+  }
   mySerial.println("servoYerba/OFF");
 }
 
-void atenderAzucar(){
-  
+void atenderAzucar(int cant){
+  long cm = readUltrasonicDistance();
+  Serial.print("centimetros: ");
+  Serial.println(cm);
+  int i=0;
+  if(cm<=10){
+    for(i=0;i<cant;i++){
+      servo.write(posServoAzucar);
+      espera(800);
+      servo.write(0);
+      espera(200);
+    }
+  }
+  mySerial.println("servoAzucar/OFF");
+}
+
+void atenderBomba(){
+  digitalWrite(8,HIGH);
+  espera(300);
+  digitalWrite(8,LOW);
+  mySerial.println("bomba/OFF");
 }
 
 long readUltrasonicDistance(){
 
-  long duration, distance;
-  digitalWrite(triggerPin, HIGH);
-  esperaMicros(500);
-  digitalWrite(triggerPin, LOW);
-  duration = pulseIn(echoPin,HIGH);
-  distance = (duration/2)/29.4;
-  esperaMicros(100);
-  return distance;
+  digitalWrite(triggerPin,LOW);
+  esperaMicros(2);
+  digitalWrite(triggerPin,HIGH);
+  esperaMicros(10);
+  digitalWrite(triggerPin,LOW);
+  return 0.01723*pulseIn(echoPin,HIGH);
 }
 
 void espera(long tiempo){
