@@ -33,8 +33,10 @@
             android:id="@+id/textView4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="150px"
             android:text="Horario:"
-            android:layout_marginTop="150px"/>
+            android:textSize="24sp"
+            android:textStyle="bold" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -45,15 +47,21 @@
                 android:id="@+id/editTextHorario"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:ems="10"
+                android:layout_marginLeft="180px"
+                android:ems="7"
                 android:enabled="false"
-                android:inputType="time" />
+                android:inputType="time"
+                android:textAlignment="center"
+                android:textColor="#000000"
+                android:textSize="30sp"
+                android:textStyle="bold" />
 
             <ImageButton
-                android:id="@+id/ib_obtener_hora"
+                android:id="@+id/button_obtener_hora"
+                style="@style/Widget.AppCompat.ImageButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_add"
+                android:src="@drawable/ic_reloj"
                 app:layout_constraintHorizontal_bias="0.504"
                 tools:ignore="ContentDescription" />
         </LinearLayout>
@@ -62,8 +70,10 @@
             android:id="@+id/textView5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="50px"
             android:text="Perfil:"
-            android:layout_marginTop="50px"/>
+            android:textSize="24sp"
+            android:textStyle="bold" />
 
         <Spinner
             android:id="@+id/spinner"
