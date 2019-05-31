@@ -88,23 +88,20 @@ public class ProgramarHorarios extends AppCompatActivity implements TimePickerDi
 
         guardarButton.setOnClickListener(new View.OnClickListener() {
             @Override
+
             public void onClick(View v){
-                if (textoHorario.getText() != null && spinnerPerfiles.getSelectedItem() != null){
-                    databaseReference.child("horarioAutomatico").setValue(textoHorario.getText());
+                if (textoHorario.getText() != null){
+                    databaseReference.child("horarioAutomatico").setValue(textoHorario.getText().toString());
                     databaseReference.child("programaAutomatico").setValue(1);
-                    databaseReference.child("azucarAutomatico").setValue(spinnerPerfiles.getSelectedItem());
+                    databaseReference.child("azucarAutomatico")
+                            .setValue(Integer
+                            .parseInt(spinnerPerfiles.getSelectedItem()
+                            .toString().split(" ")[2]
+                            .trim()));
                 }
                 else{
                     Toast.makeText(ProgramarHorarios.this,"Valores ingresados incorrectos!", Toast.LENGTH_LONG).show();
                 }
-            }
-        });
-
-        guardarButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                databaseReference.child("programaActivado").setValue(1);
-                databaseReference.child("horarioAutomatico").setValue(textoHorario);
             }
         });
     }
