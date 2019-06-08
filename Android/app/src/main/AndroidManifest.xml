@@ -24,8 +24,9 @@
             android:theme="@style/AppThemeSmarte" />
         <activity android:name=".MateAlGustoActivity" />
         <activity android:name=".IniciarCebador" />
-        <activity android:name=".MainActivity">
-            <intent-filter>
+        <activity android:name=".PanelDeControl" />
+        <activity android:name=".MainActivity" >
+        <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />

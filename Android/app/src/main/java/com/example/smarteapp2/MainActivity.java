@@ -47,5 +47,14 @@ public class MainActivity extends AppCompatActivity {
                 startActivityForResult(intent, 0);
             }
         });
+
+        Button btnPanelControl = findViewById(R.id.panelControlButton);
+        btnPanelControl.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), PanelDeControl.class);
+                startActivityForResult(intent, 0);
+            }
+        });
     }
 }
