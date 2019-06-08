@@ -2,12 +2,12 @@
 
 #include <FirebaseArduino.h>
 
-IPAddress ip(192,168,1,200);   
+/*IPAddress ip(192,168,1,200);   
 IPAddress gateway(192,168,1,1);   
 IPAddress subnet(255,255,255,0);  
-
-#define WIFI_SSID ""
-#define WIFI_PASSWORD ""
+*/
+#define WIFI_SSID "Honor 8X"
+#define WIFI_PASSWORD "maxwifi14"
 #define FIREBASE_HOST "smarteapp2.firebaseio.com"
 #define FIREBASE_AUTH "CldLG68wPna2ZMU9AhfYq4ruMfghQpSGcP0Qx38T"
 
@@ -21,7 +21,7 @@ void setup()
   
   while (WiFi.status() != WL_CONNECTED) {
     Serial.print(".");
-    espera(500);
+    delay(300);
   }
   
   Serial.println();
@@ -38,9 +38,10 @@ void loop()
     Serial.println("servoYerba/1");
     String txt = Serial.readString();
     while(!(txt.indexOf("servoYerba/OFF")>-1)){
-        txt = Serial.readString();
+      txt = Serial.readString();
+      
     }
-    Firebase.setInt("servoYerba",0);
+    Firebase.setInt("servoYerba",0);  
   }
   
   if(Firebase.getInt("servoAzucar"))
@@ -72,7 +73,7 @@ void loop()
     return;
   }
 
-  espera(800);
+  delay(800);
 }
 
 void espera(long tiempo){
