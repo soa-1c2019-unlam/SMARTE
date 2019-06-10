@@ -35,6 +35,11 @@ public class IniciarPerfiles extends AppCompatActivity {
     Perfil perfilSeleccionado;
     Button iniciarPerfilButton;
 
+    List<MatesPorDia> matesPorDiaList = new ArrayList<MatesPorDia>();
+    MatesPorDia ultimoMate;
+
+    long cantidadAzucarTotal = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,6 +68,8 @@ public class IniciarPerfiles extends AppCompatActivity {
                 databaseReference.child("servoAzucar").setValue(1);
                 databaseReference.child("servoYerba").setValue(1);
                 databaseReference.child("cantAzucar").setValue(Integer.parseInt(perfilSeleccionado.getAzucar()));
+                databaseReference.child("funcionaConMicrofono").setValue(1);
+                databaseReference.child("azucarUsada").setValue(cantidadAzucarTotal+perfilSeleccionado.getAzucar());
                 Toast.makeText(IniciarPerfiles.this,"A Disfrutar del mejor mate!", Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(v.getContext(), MainActivity.class);
                 startActivityForResult(intent, 0);
@@ -94,7 +101,43 @@ public class IniciarPerfiles extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError databaseError) {
             }
         });
+
+        databaseReference.child("MatesPorDia").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot objSnapShot : dataSnapshot.getChildren()){
+                    MatesPorDia p = new MatesPorDia(objSnapShot.getValue(MatesPorDia.class));
+                    matesPorDiaList.add(p);
+
+                    if (matesPorDiaList.size() > 0){
+                        String fecha = matesPorDiaList.get(matesPorDiaList.size()-1).getFecha();
+                        int mates = matesPorDiaList.get(matesPorDiaList.size()-1).getMates();
+                        String id = matesPorDiaList.get(matesPorDiaList.size()-1).getId();
+
+                        ultimoMate = new MatesPorDia(id, fecha, mates);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        databaseReference.child("azucarUsada").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                cantidadAzucarTotal = (long)dataSnapshot.getValue();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
+
 
     private void inicializarFirebase() {
         FirebaseApp.initializeApp(this);

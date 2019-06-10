@@ -51,5 +51,13 @@
             android:background="@android:drawable/toast_frame"
             android:text="Panel De Control" />
 
+        <Button
+            android:id="@+id/statsButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10px"
+            android:background="@android:drawable/toast_frame"
+            android:text="Estadísticas" />
+
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

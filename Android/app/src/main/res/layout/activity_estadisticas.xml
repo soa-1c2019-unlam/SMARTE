@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Estadisticas">
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:background="@drawable/fondoazul"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Estadísticas"
+            android:textColor="#EE000000"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:textAlignment="center"/>
+
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Cantidad de mates tomados"
+            android:textColor="#FA090000"
+            android:textSize="24sp"
+            android:layout_marginTop="10px"/>
+
+        <TextView
+            android:id="@+id/textViewMatesTomados"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="#030B30"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textAlignment="center"
+            android:layout_marginTop="30px"/>
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Promedio de mates por día"
+            android:textColor="#FA090000"
+            android:textSize="24sp"
+            android:layout_marginTop="10px"/>
+
+        <TextView
+            android:id="@+id/textViewPromedioMatePorDia"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="#030B30"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textAlignment="center"
+            android:layout_marginTop="30px"/>
+
+        <TextView
+            android:id="@+id/textViewAxdia"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Azucar usado"
+            android:textColor="#FA090000"
+            android:textSize="24sp"
+            android:layout_marginTop="10px"/>
+
+        <TextView
+            android:id="@+id/textViewAzucarUsado"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="#030B30"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textAlignment="center"
+            android:layout_marginTop="30px"/>
+
+        <TextView
+            android:id="@+id/textViewAxMate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Promedio azucar por mate"
+            android:textColor="#FA090000"
+            android:textSize="24sp"
+            android:layout_marginTop="10px"/>
+
+        <TextView
+            android:id="@+id/textViewPromedioAzucarPorMate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="#030B30"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textAlignment="center"
+            android:layout_marginTop="30px"/>
+
+        <TextView
+            android:id="@+id/textViewMax"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Máxima cantidad de mates en un día"
+            android:textColor="#FA090000"
+            android:textSize="24sp"
+            android:layout_marginTop="10px"/>
+
+        <TextView
+            android:id="@+id/textViewMaximaCantidadEnUnDia"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="#030B30"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textAlignment="center"
+            android:layout_marginTop="30px"/>
+
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>

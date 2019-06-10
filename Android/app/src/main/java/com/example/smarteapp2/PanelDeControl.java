@@ -22,10 +22,6 @@ public class PanelDeControl extends AppCompatActivity {
     FirebaseDatabase firebaseDataBase;
     DatabaseReference databaseReference;
 
-
-
-    long distanciaAceptableMate = 20;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,7 +55,7 @@ public class PanelDeControl extends AppCompatActivity {
                     txtViewTemperatura.setTextColor(Color.RED);
 
                 txtViewTemperatura.setText(temp.toString());
-            }
+        }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
@@ -67,16 +63,16 @@ public class PanelDeControl extends AppCompatActivity {
             }
         });
 
-        databaseReference.child("ultrasonido").addValueEventListener(new ValueEventListener() {
+        databaseReference.child("matePuesto").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 TextView txtViewUltrasonido = findViewById(R.id.ultrasonidoTxtView);
-                Long ultrasonido = (Long)dataSnapshot.getValue();
+                Long matePuesto = (Long)dataSnapshot.getValue();
 
-                if (ultrasonido >= distanciaAceptableMate) {
+                if (matePuesto != 1) {
                     txtViewUltrasonido.setText("Mate no Encontrado");
                     txtViewUltrasonido.setTextColor(Color.RED);
-                } else if(ultrasonido <= distanciaAceptableMate) {
+                } else{
                     txtViewUltrasonido.setTextColor(Color.GREEN);
                     txtViewUltrasonido.setText("Mate Encontrado");
                 }
@@ -84,7 +80,6 @@ public class PanelDeControl extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
             }
         });
 

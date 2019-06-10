@@ -13,7 +13,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         android:usesCleartextTraffic="true">
-        <activity android:name=".pickersActivity"></activity>
+        <activity android:name=".Estadisticas"></activity>
+        <activity android:name=".pickersActivity" />
         <activity android:name=".CustomListAdaptar" />
         <activity android:name=".CustomListView" />
         <activity android:name=".IniciarPerfiles" />
@@ -25,8 +26,8 @@
         <activity android:name=".MateAlGustoActivity" />
         <activity android:name=".IniciarCebador" />
         <activity android:name=".PanelDeControl" />
-        <activity android:name=".MainActivity" >
-        <intent-filter>
+        <activity android:name=".MainActivity">
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
