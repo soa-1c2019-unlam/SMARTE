@@ -1,5 +1,6 @@
 package com.example.smarteapp2;
 
+import android.hardware.SensorEventListener;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -20,8 +21,14 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
+import android.content.Context;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorManager;
 
-public class MateAlGustoActivity extends AppCompatActivity {
+
+
+public class MateAlGustoActivity extends AppCompatActivity implements SensorEventListener {
 
     FirebaseDatabase firebaseDataBase;
     DatabaseReference databaseReference;
@@ -32,8 +39,16 @@ public class MateAlGustoActivity extends AppCompatActivity {
     boolean matePuesto;
 
     String fechaDeHoy;
-
     fechasEnBase fechasMate;
+
+    //DEFINICION SENSORES A USAR EN ANDROID
+    private SensorManager sm;
+    Sensor sensorAcel;
+    Sensor sensorProx;
+    Sensor sensorGiros;
+    private float aceleracion;
+    private float ultAceleracion;
+    private float shake;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -56,6 +71,20 @@ public class MateAlGustoActivity extends AppCompatActivity {
         botonAgua = findViewById(R.id.colocarAguaButton);
         botonAzucar = findViewById(R.id.azucarButton);
         botonYerba = findViewById(R.id.yerbaButton);
+
+        //DEFINICION SENSORMANAGER
+        sm = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        sensorAcel = sm.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        sensorProx = sm.getDefaultSensor(Sensor.TYPE_PROXIMITY);
+        sensorGiros = sm.getDefaultSensor(Sensor.TYPE_GYROSCOPE);
+
+        sm.registerListener(this, sensorAcel, SensorManager.SENSOR_DELAY_NORMAL);
+        sm.registerListener(this,sensorProx, SensorManager.SENSOR_DELAY_NORMAL);
+        sm.registerListener(this,sensorGiros,SensorManager.SENSOR_DELAY_NORMAL);
+
+        aceleracion = SensorManager.GRAVITY_EARTH;
+        ultAceleracion = SensorManager.GRAVITY_EARTH;
+        shake = 0.00f;
 
         botonAgua.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -107,6 +136,45 @@ public class MateAlGustoActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    public void onSensorChanged(SensorEvent sensorEvent) {
+
+        if (sensorEvent.sensor.getName() == sensorAcel.getName()) {
+            float x = sensorEvent.values[0];
+            float y = sensorEvent.values[1];
+            float z = sensorEvent.values[2];
+
+            ultAceleracion = aceleracion;
+            aceleracion = (float) Math.sqrt((double) (x * x + y * y + z * z));
+            float delta = aceleracion - ultAceleracion;
+            shake = shake * 0.9f + delta;
+
+            if (shake > 50) {
+
+                botonAgua.callOnClick();
+            }
+        }
+
+        if (sensorEvent.sensor.getName() == sensorProx.getName())
+        {
+            if(sensorEvent.values[0] == 0);
+            botonYerba.callOnClick();
+        }
+
+        if (sensorEvent.sensor.getName() == sensorGiros.getName())
+        {
+
+            if(sensorEvent.values[1] < -3f)
+            {
+                botonAzucar.callOnClick();
+            }
+        }
+    }
+
+    @Override
+    public void onAccuracyChanged(Sensor sensor, int accuracy) {
+
     }
 
     private void inicializarFirebase() {
