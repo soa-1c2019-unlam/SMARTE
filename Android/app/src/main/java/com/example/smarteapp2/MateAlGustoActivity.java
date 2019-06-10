@@ -1,7 +1,5 @@
 package com.example.smarteapp2;
 
-import android.content.Context;
-import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -10,9 +8,7 @@ import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
-
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -38,8 +34,6 @@ public class MateAlGustoActivity extends AppCompatActivity {
     String fechaDeHoy;
 
     fechasEnBase fechasMate;
-
-    long cantidadAzucarTotal = 0;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -69,17 +63,17 @@ public class MateAlGustoActivity extends AppCompatActivity {
                 databaseReference.child("funcionaConMicrofono").setValue(0);
                 if (matePuesto){
                     databaseReference.child("bomba").setValue(1);
-                    if(ultimoMate != null && ultimoMate.getFecha() == fechaDeHoy){
-                        MatesPorDia mate = new MatesPorDia(ultimoMate.getId(), ultimoMate.getFecha(), ultimoMate.getMates()+1);
+                    if(ultimoMate != null && Integer.parseInt(ultimoMate.getFecha()) == Integer.parseInt(fechaDeHoy)){
+                        MatesPorDia mate = new MatesPorDia(ultimoMate.getId(), ultimoMate.getFecha(), ultimoMate.getMates()+1, ultimoMate.getAzucar());
                         databaseReference.child("MatesPorDia").child(mate.getId()).setValue(mate);
                     }
                     else{
-                        MatesPorDia mate = new MatesPorDia(fechaDeHoy, fechaDeHoy, 1);
+                        MatesPorDia mate = new MatesPorDia(fechaDeHoy, fechaDeHoy, 1, 0);
                         databaseReference.child("MatesPorDia").child(mate.getId()).setValue(mate);
                     }
                 }
                 else{
-                    Toast.makeText(getApplicationContext(),"No hay mate puesto", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(),"No hay mate colocado", Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -92,7 +86,7 @@ public class MateAlGustoActivity extends AppCompatActivity {
                     databaseReference.child("servoYerba").setValue(1);
                 }
                 else{
-                    Toast.makeText(getApplicationContext(),"No hay mate puesto", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(),"No hay mate colocado", Toast.LENGTH_LONG).show();
                 }
 
             }
@@ -105,10 +99,11 @@ public class MateAlGustoActivity extends AppCompatActivity {
                 if (matePuesto){
                     databaseReference.child("servoAzucar").setValue(1);
                     databaseReference.child("cantAzucar").setValue(1);
-                    databaseReference.child("azucarUsada").setValue(cantidadAzucarTotal++);
+                    MatesPorDia mate = new MatesPorDia(ultimoMate.getId(), ultimoMate.getFecha(), ultimoMate.getMates(), ultimoMate.getAzucar()+1);
+                    databaseReference.child("MatesPorDia").child(mate.getId()).setValue(mate);
                 }
                 else{
-                    Toast.makeText(getApplicationContext(),"No hay mate puesto", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(),"No hay mate colocado", Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -132,8 +127,10 @@ public class MateAlGustoActivity extends AppCompatActivity {
                         String fecha = matesPorDiaList.get(matesPorDiaList.size()-1).getFecha();
                         int mates = matesPorDiaList.get(matesPorDiaList.size()-1).getMates();
                         String id = matesPorDiaList.get(matesPorDiaList.size()-1).getId();
+                        int azucar = matesPorDiaList.get(matesPorDiaList.size()-1).getAzucar();
 
-                        ultimoMate = new MatesPorDia(id, fecha, mates);
+                        ultimoMate = new MatesPorDia(id, fecha, mates, azucar);
+
                     }
                 }
             }
@@ -143,19 +140,6 @@ public class MateAlGustoActivity extends AppCompatActivity {
 
             }
         });
-
-        databaseReference.child("azucarUsada").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                cantidadAzucarTotal = (long)dataSnapshot.getValue();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
 
     }
 
@@ -197,8 +181,9 @@ public class MateAlGustoActivity extends AppCompatActivity {
                             String fecha = matesPorDiaList.get(matesPorDiaList.size()-1).getFecha();
                             int mates = matesPorDiaList.get(matesPorDiaList.size()-1).getMates();
                             String id = matesPorDiaList.get(matesPorDiaList.size()-1).getId();
+                            int azucar = matesPorDiaList.get(matesPorDiaList.size()-1).getAzucar();
 
-                            ultimoMate = new MatesPorDia(id, fecha, mates);
+                            ultimoMate = new MatesPorDia(id, fecha, mates, azucar);
                         }
                     }
                 }
@@ -208,19 +193,6 @@ public class MateAlGustoActivity extends AppCompatActivity {
 
                 }
             });
-
-            databaseReference.child("azucarUsada").addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    cantidadAzucarTotal = (long)dataSnapshot.getValue();
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                }
-            });
-
 
             return true;
         }

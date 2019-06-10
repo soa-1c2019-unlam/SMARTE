@@ -69,7 +69,12 @@ public class IniciarPerfiles extends AppCompatActivity {
                 databaseReference.child("servoYerba").setValue(1);
                 databaseReference.child("cantAzucar").setValue(Integer.parseInt(perfilSeleccionado.getAzucar()));
                 databaseReference.child("funcionaConMicrofono").setValue(1);
-                databaseReference.child("azucarUsada").setValue(cantidadAzucarTotal+perfilSeleccionado.getAzucar());
+
+                int cantidadDeAzucar = ultimoMate.getAzucar() + Integer.parseInt(perfilSeleccionado.getAzucar());
+
+                MatesPorDia mate = new MatesPorDia(ultimoMate.getId(), ultimoMate.getFecha(), ultimoMate.getMates(), cantidadDeAzucar);
+                databaseReference.child("MatesPorDia").child(mate.getId()).setValue(mate);
+
                 Toast.makeText(IniciarPerfiles.this,"A Disfrutar del mejor mate!", Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(v.getContext(), MainActivity.class);
                 startActivityForResult(intent, 0);
@@ -113,8 +118,9 @@ public class IniciarPerfiles extends AppCompatActivity {
                         String fecha = matesPorDiaList.get(matesPorDiaList.size()-1).getFecha();
                         int mates = matesPorDiaList.get(matesPorDiaList.size()-1).getMates();
                         String id = matesPorDiaList.get(matesPorDiaList.size()-1).getId();
+                        int azucar = matesPorDiaList.get(matesPorDiaList.size()-1).getAzucar();
 
-                        ultimoMate = new MatesPorDia(id, fecha, mates);
+                        ultimoMate = new MatesPorDia(id, fecha, mates, azucar);
                     }
                 }
             }
@@ -125,17 +131,6 @@ public class IniciarPerfiles extends AppCompatActivity {
             }
         });
 
-        databaseReference.child("azucarUsada").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                cantidadAzucarTotal = (long)dataSnapshot.getValue();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
     }
 
 

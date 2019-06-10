@@ -37,7 +37,14 @@ public class Estadisticas extends AppCompatActivity {
 
     String fechaDeHoy;
 
-    long cantidadAzucarTotal = 0;
+    int cantidadTotalDeMates = 1;
+    long cantidadTotalDeAzucar = 1;
+    MatesPorDia maximoMatePorDia;
+    long cantidadDeDias;
+    float promedioDeMatesPorDia;
+    float promedioDeAzucarPorMate;
+
+    List<MatesPorDia> matesPorDiaList = new ArrayList<MatesPorDia>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,67 +71,10 @@ public class Estadisticas extends AppCompatActivity {
     }
 
     private class updateStats extends AsyncTask<Void, Integer, Boolean>{
-        long cantidadTotalDeMates = 1;
-        long cantidadTotalDeAzucar = 1;
-        List<MatesPorDia> matesPorDiaList = new ArrayList<MatesPorDia>();
-        MatesPorDia maximoMatePorDia;
-        long cantidadDeDias;
-        float promedioDeMatesPorDia;
-        float promedioDeAzucarPorMate;
 
         @Override
         protected Boolean doInBackground(Void... voids) {
 
-            databaseReference.child("cantidadDeMates").addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    cantidadTotalDeMates = (long)dataSnapshot.getValue();
-                    matesTomados.setText(String.valueOf(cantidadTotalDeMates));
-
-                    cantidadDeDias = matesPorDiaList.size();
-
-                    if(cantidadDeDias != 0){
-                        promedioDeMatesPorDia = cantidadTotalDeMates / cantidadDeDias;
-                        promedioPorDia.setText(String.valueOf(promedioDeMatesPorDia));
-
-                        promedioDeAzucarPorMate = cantidadTotalDeAzucar / cantidadTotalDeMates;
-                        azucarPorMate.setText(String.valueOf(promedioDeAzucarPorMate));
-
-                        Collections.sort(matesPorDiaList, new ComparadorDeFechas());
-                        int cantidadDeMatesMax = matesPorDiaList.get(0).getMates();
-                        String fechaMax = matesPorDiaList.get(0).getFecha();
-                        String id = matesPorDiaList.get(0).getId();
-
-                        maximoMatePorDia = new MatesPorDia(id , fechaMax, cantidadDeMatesMax);
-
-                        maximaCantidad.setText(maximoMatePorDia.toString());
-                    }
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                }
-            });
-
-            databaseReference.child("azucarUsada").addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    cantidadTotalDeAzucar = (long)dataSnapshot.getValue();
-                    azucarUsada.setText(String.valueOf(cantidadTotalDeAzucar));
-
-                    promedioDeMatesPorDia = cantidadTotalDeMates / cantidadDeDias;
-                    promedioPorDia.setText(String.valueOf(promedioDeMatesPorDia));
-
-                    promedioDeAzucarPorMate = cantidadTotalDeAzucar / cantidadTotalDeMates;
-                    azucarPorMate.setText(String.valueOf(promedioDeAzucarPorMate));
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                }
-            });
 
             databaseReference.child("MatesPorDia").addValueEventListener(new ValueEventListener() {
                 @Override
@@ -139,15 +89,21 @@ public class Estadisticas extends AppCompatActivity {
                             String fecha = matesPorDiaList.get(matesPorDiaList.size()-1).getFecha();
                             int mates = matesPorDiaList.get(matesPorDiaList.size()-1).getMates();
                             String id = matesPorDiaList.get(matesPorDiaList.size()-1).getId();
+                            int azucar = matesPorDiaList.get(matesPorDiaList.size()-1).getAzucar();
 
-                            ultimoMate = new MatesPorDia(id, fecha, mates);
+                            ultimoMate = new MatesPorDia(id, fecha, mates, azucar);
                         }
 
                         if(cantidadDeDias != 0){
 
+                            cantidadTotalDeMates = calcularCantidadDeMates();
+                            matesTomados.setText(String.valueOf(cantidadTotalDeMates));
+
                             promedioDeMatesPorDia = cantidadTotalDeMates / cantidadDeDias;
                             promedioPorDia.setText(String.valueOf(promedioDeMatesPorDia));
 
+                            cantidadTotalDeAzucar = calcularCantidadDeAzucar();
+                            azucarUsada.setText(String.valueOf(cantidadTotalDeAzucar));
                             promedioDeAzucarPorMate = cantidadTotalDeAzucar / cantidadTotalDeMates;
                             azucarPorMate.setText(String.valueOf(promedioDeAzucarPorMate));
 
@@ -155,10 +111,12 @@ public class Estadisticas extends AppCompatActivity {
                             int cantidadDeMatesMax = matesPorDiaList.get(0).getMates();
                             String fechaMax = matesPorDiaList.get(0).getFecha();
                             String id = matesPorDiaList.get(0).getId();
+                            int cantidadAzucar = matesPorDiaList.get(0).getAzucar();
 
-                            maximoMatePorDia = new MatesPorDia(id , fechaMax, cantidadDeMatesMax);
+                            maximoMatePorDia = new MatesPorDia(id , fechaMax, cantidadDeMatesMax, cantidadAzucar);
 
                             maximaCantidad.setText(maximoMatePorDia.toString());
+
                         }
                     }
                 }
@@ -175,11 +133,11 @@ public class Estadisticas extends AppCompatActivity {
                     for (DataSnapshot objSnapShot : dataSnapshot.getChildren()){
                         MatesPorDia p = new MatesPorDia(objSnapShot.getValue(MatesPorDia.class));
                         if(ultimoMate != null && ultimoMate.getFecha() == fechaDeHoy){
-                            MatesPorDia mate = new MatesPorDia(ultimoMate.getId(), ultimoMate.getFecha(), ultimoMate.getMates()+1);
+                            MatesPorDia mate = new MatesPorDia(ultimoMate.getId(), ultimoMate.getFecha(), ultimoMate.getMates()+1, ultimoMate.getAzucar());
                             databaseReference.child("MatesPorDia").child(mate.getId()).setValue(mate);
                         }
                         else{
-                            MatesPorDia mate = new MatesPorDia(fechaDeHoy, fechaDeHoy, 1);
+                            MatesPorDia mate = new MatesPorDia(fechaDeHoy, fechaDeHoy, 1, 0);
                             databaseReference.child("MatesPorDia").child(mate.getId()).setValue(mate);
                         }
                     }
@@ -193,6 +151,26 @@ public class Estadisticas extends AppCompatActivity {
 
             return true;
         }
+    }
+
+    private int calcularCantidadDeMates(){
+        int cantidad = 0;
+
+        for (MatesPorDia mates: matesPorDiaList) {
+            cantidad = cantidad + mates.getMates();
+        }
+
+        return cantidad;
+    }
+
+    private int calcularCantidadDeAzucar(){
+        int cantidad = 0;
+
+        for (MatesPorDia mates: matesPorDiaList) {
+            cantidad = cantidad + mates.getAzucar();
+        }
+
+        return cantidad;
     }
 
 }

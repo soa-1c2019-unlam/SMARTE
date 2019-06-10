@@ -6,6 +6,7 @@ import java.util.Date;
 public class MatesPorDia {
     String id;
     String fecha;
+    int azucar;
     int mates;
 
     public MatesPorDia(){
@@ -16,13 +17,15 @@ public class MatesPorDia {
         this.id = matesPorDia.getId();
         this.fecha = matesPorDia.getFecha();
         this.mates = matesPorDia.getMates();
+        this.azucar = matesPorDia.getAzucar();
 
     }
 
-    public MatesPorDia (String id, String fecha, int mates){
+    public MatesPorDia (String id, String fecha, int mates, int azucar){
         this.id = id;
         this.fecha = fecha;
         this.mates = mates;
+        this.azucar = azucar;
     }
 
     public String getId(){ return id;}
@@ -35,6 +38,8 @@ public class MatesPorDia {
         return fecha;
     }
 
+    public int getAzucar(){ return azucar; }
+
     public void setId(String id){
         this.id = id;
     }
@@ -46,6 +51,8 @@ public class MatesPorDia {
     public void setFecha(String fecha){
         this.fecha = fecha;
     }
+
+    public void setAzucar(int azucar) { this.azucar = azucar ;}
 
     @Override
     public String toString(){
