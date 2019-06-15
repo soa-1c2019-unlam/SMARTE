@@ -11,115 +11,285 @@
         android:background="@drawable/fondoazul"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/textView8"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Estadísticas"
-            android:textColor="#EE000000"
-            android:textSize="30sp"
-            android:textStyle="bold"
-            android:textAlignment="center"/>
 
-        <TextView
-            android:id="@+id/textView9"
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Cantidad de mates tomados"
-            android:textColor="#FA090000"
-            android:textSize="24sp"
-            android:layout_marginTop="10px"/>
+            android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/textViewMatesTomados"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text=""
-            android:textColor="#030B30"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:textAlignment="center"
-            android:layout_marginTop="30px"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                    <TextView
+                        android:id="@+id/textView8"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Estadísticas"
+                        android:textColor="#EE000000"
+                        android:textSize="30sp"
+                        android:textStyle="bold"
+                        android:textAlignment="center"/>
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Promedio de mates por día"
-            android:textColor="#FA090000"
-            android:textSize="24sp"
-            android:layout_marginTop="10px"/>
+                    <TextView
+                        android:id="@+id/textView9"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Cantidad de mates tomados"
+                        android:textColor="#FA090000"
+                        android:textSize="24sp"
+                        android:layout_marginTop="10px"/>
 
-        <TextView
-            android:id="@+id/textViewPromedioMatePorDia"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text=""
-            android:textColor="#030B30"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:textAlignment="center"
-            android:layout_marginTop="30px"/>
+                    <TextView
+                        android:id="@+id/textViewMatesTomados"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:textColor="#030B30"
+                        android:textSize="24sp"
+                        android:textStyle="bold"
+                        android:textAlignment="center"
+                        android:layout_marginTop="30px"/>
 
-        <TextView
-            android:id="@+id/textViewAxdia"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Azucar usado"
-            android:textColor="#FA090000"
-            android:textSize="24sp"
-            android:layout_marginTop="10px"/>
+                    <View
+                        android:id="@+id/dividera"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="?android:attr/listDivider" />
 
-        <TextView
-            android:id="@+id/textViewAzucarUsado"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text=""
-            android:textColor="#030B30"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:textAlignment="center"
-            android:layout_marginTop="30px"/>
+                    <TextView
+                        android:id="@+id/textView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Promedio de mates por día"
+                        android:textColor="#FA090000"
+                        android:textSize="24sp"
+                        android:layout_marginTop="10px"/>
 
-        <TextView
-            android:id="@+id/textViewAxMate"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Promedio azucar por mate"
-            android:textColor="#FA090000"
-            android:textSize="24sp"
-            android:layout_marginTop="10px"/>
+                    <TextView
+                        android:id="@+id/textViewPromedioMatePorDia"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:textColor="#030B30"
+                        android:textSize="24sp"
+                        android:textStyle="bold"
+                        android:textAlignment="center"
+                        android:layout_marginTop="30px"/>
 
-        <TextView
-            android:id="@+id/textViewPromedioAzucarPorMate"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text=""
-            android:textColor="#030B30"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:textAlignment="center"
-            android:layout_marginTop="30px"/>
+                <View
+                    android:id="@+id/divider4"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="?android:attr/listDivider" />
 
-        <TextView
-            android:id="@+id/textViewMax"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Máxima cantidad de mates en un día"
-            android:textColor="#FA090000"
-            android:textSize="24sp"
-            android:layout_marginTop="10px"/>
+                <TextView
+                        android:id="@+id/textViewAxdia"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Azucar usado"
+                        android:textColor="#FA090000"
+                        android:textSize="24sp"
+                        android:layout_marginTop="10px"/>
 
-        <TextView
-            android:id="@+id/textViewMaximaCantidadEnUnDia"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text=""
-            android:textColor="#030B30"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:textAlignment="center"
-            android:layout_marginTop="30px"/>
+                    <TextView
+                        android:id="@+id/textViewAzucarUsado"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:textColor="#030B30"
+                        android:textSize="24sp"
+                        android:textStyle="bold"
+                        android:textAlignment="center"
+                        android:layout_marginTop="30px"/>
 
+                <View
+                    android:id="@+id/divider3"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="?android:attr/listDivider" />
+
+                <TextView
+                        android:id="@+id/textViewAxMate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Promedio azucar por mate"
+                        android:textColor="#FA090000"
+                        android:textSize="24sp"
+                        android:layout_marginTop="10px"/>
+
+                    <TextView
+                        android:id="@+id/textViewPromedioAzucarPorMate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:textColor="#030B30"
+                        android:textSize="24sp"
+                        android:textStyle="bold"
+                        android:textAlignment="center"
+                        android:layout_marginTop="30px"/>
+
+                <View
+                    android:id="@+id/divider2"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="?android:attr/listDivider" />
+
+                <TextView
+                        android:id="@+id/textViewMax"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Máxima cantidad de mates en un día"
+                        android:textColor="#FA090000"
+                        android:textSize="24sp"
+                        android:layout_marginTop="10px"/>
+
+                    <TextView
+                        android:id="@+id/textViewMaximaCantidadEnUnDia"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:textColor="#030B30"
+                        android:textSize="24sp"
+                        android:textStyle="bold"
+                        android:textAlignment="center"
+                        android:layout_marginTop="30px"/>
+
+                <View
+                    android:id="@+id/divider"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="?android:attr/listDivider" />
+
+                <TextView
+                    android:id="@+id/textViewAguaTomada"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10px"
+                    android:layout_marginBottom="10px"
+                    android:text="Porcentajes diarios saludables"
+                    android:textAlignment="center"
+                    android:textColor="#FA090000"
+                    android:textSize="24sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textView10"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginTop="10px"
+                        android:layout_marginBottom="10px"
+                        android:text="Agua consumida"
+                        android:textColor="#FA090000"
+                        android:textAlignment="center"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/textView12"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginTop="10px"
+                        android:layout_marginBottom="10px"
+                        android:text="Azucar consumido"
+                        android:textColor="#FA090000"
+                        android:textAlignment="center"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:showDividers="middle">
+
+                    <ProgressBar
+                        android:id="@+id/progressBarAgua"
+                        style="@android:style/Widget.ProgressBar.Horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20px"
+                        android:layout_marginRight="10px"
+                        android:progressTint="#08A595"
+                        android:progressBackgroundTint="#57FFFFFF"
+                        android:layout_weight="4" />
+
+                    <ProgressBar
+                        android:id="@+id/progressBarAzucar"
+                        style="@android:style/Widget.ProgressBar.Horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10px"
+                        android:layout_marginRight="20px"
+                        android:progressTint="#08A595"
+                        android:progressBackgroundTint="#57FFFFFF"
+                        android:layout_weight="4" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textViewPorcentajeAgua"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textAlignment="center"
+                        android:textColor="#020000"
+                        android:textSize="16sp"/>
+
+                    <TextView
+                        android:id="@+id/textViewPorcentajeAzucar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textAlignment="center"
+                        android:textColor="#020000"
+                        android:textSize="16sp"/>
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/textViewReporte"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20px"
+                    android:layout_weight="1"
+                    android:text="Reporte"
+                    android:textColor="#030303"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/textViewReporteAgua"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20px"
+                    android:layout_marginLeft="30px"
+                    android:layout_weight="1"
+                    android:text="• No llegaste a 2lts de agua por día"
+                    android:textColor="#050000"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/textViewReporteAzucar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30px"
+                    android:layout_marginTop="20px"
+                    android:layout_weight="1"
+                    android:text="• Consumo de azucar normal"
+                    android:textColor="#050000"
+                    android:textSize="18sp" />
+            </LinearLayout>
+        </ScrollView>
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

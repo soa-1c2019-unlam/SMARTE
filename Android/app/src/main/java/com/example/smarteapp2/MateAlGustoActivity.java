@@ -33,10 +33,10 @@ public class MateAlGustoActivity extends AppCompatActivity implements SensorEven
     FirebaseDatabase firebaseDataBase;
     DatabaseReference databaseReference;
 
-    Button botonAzucar, botonYerba, botonAgua;
+    Button botonAzucar, botonYerba, botonAgua, botonCalentarAgua;
     List<MatesPorDia> matesPorDiaList = new ArrayList<MatesPorDia>();
     MatesPorDia ultimoMate;
-    boolean matePuesto;
+    boolean matePuesto = true;
 
     String fechaDeHoy;
     fechasEnBase fechasMate;
@@ -58,21 +58,19 @@ public class MateAlGustoActivity extends AppCompatActivity implements SensorEven
 
         inicializarFirebase();
 
-        fechasMate = new fechasEnBase();
-        fechasMate.execute();
-
-        LocalDateTime dateHoy = LocalDateTime.of(LocalDate.now(), LocalTime.of(0, 0, 0));
-
-        fechaDeHoy = dateHoy.toString();
-        fechaDeHoy = fechaDeHoy.split("-")[0]+fechaDeHoy.split("-")[1]+fechaDeHoy.split("-")[2].split("T")[0];
-
-        listarDatos();
+        fechaDeHoy = TimePickerFragment.obtenerFechaDeHoy();
 
         botonAgua = findViewById(R.id.colocarAguaButton);
         botonAzucar = findViewById(R.id.azucarButton);
         botonYerba = findViewById(R.id.yerbaButton);
+        botonCalentarAgua = findViewById(R.id.calentarAguaButton);
 
-        //DEFINICION SENSORMANAGER
+        fechasMate = new fechasEnBase();
+        fechasMate.execute();
+
+        listarDatos();
+
+        //region Definicion SensorManager
         sm = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         sensorAcel = sm.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         sensorProx = sm.getDefaultSensor(Sensor.TYPE_PROXIMITY);
@@ -85,7 +83,9 @@ public class MateAlGustoActivity extends AppCompatActivity implements SensorEven
         aceleracion = SensorManager.GRAVITY_EARTH;
         ultAceleracion = SensorManager.GRAVITY_EARTH;
         shake = 0.00f;
+        //endregion
 
+        //region Click en boton agua
         botonAgua.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -106,7 +106,9 @@ public class MateAlGustoActivity extends AppCompatActivity implements SensorEven
                 }
             }
         });
+        //endregion
 
+        //region Click en boton yerba
         botonYerba.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -120,7 +122,9 @@ public class MateAlGustoActivity extends AppCompatActivity implements SensorEven
 
             }
         });
+        //endregion
 
+        //region Click en boton azucar
         botonAzucar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -136,6 +140,17 @@ public class MateAlGustoActivity extends AppCompatActivity implements SensorEven
                 }
             }
         });
+        //endregion
+
+        //region Click en boton calentar agua
+        botonCalentarAgua.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                databaseReference.child("termometro").setValue(1);
+                Toast.makeText(getApplicationContext(),"Calentando agua", Toast.LENGTH_LONG).show();
+            }
+        });
+        //endregion
     }
 
     public void onSensorChanged(SensorEvent sensorEvent) {
@@ -184,6 +199,26 @@ public class MateAlGustoActivity extends AppCompatActivity implements SensorEven
     }
 
     private void listarDatos(){
+        databaseReference.child("matePuesto").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                Long valorMate = (Long)dataSnapshot.getValue();
+
+                if (valorMate == 1) {
+                    matePuesto = true;
+                }
+                else{
+                    matePuesto = false;
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
         databaseReference.child("MatesPorDia").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -196,9 +231,7 @@ public class MateAlGustoActivity extends AppCompatActivity implements SensorEven
                         int mates = matesPorDiaList.get(matesPorDiaList.size()-1).getMates();
                         String id = matesPorDiaList.get(matesPorDiaList.size()-1).getId();
                         int azucar = matesPorDiaList.get(matesPorDiaList.size()-1).getAzucar();
-
                         ultimoMate = new MatesPorDia(id, fecha, mates, azucar);
-
                     }
                 }
             }

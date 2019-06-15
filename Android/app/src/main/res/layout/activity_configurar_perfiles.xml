@@ -39,6 +39,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:digits="0123456789."
+            android:maxLength="1"
             android:inputType="number"
             android:hint="Azucar (Cantidad de cucharadas)" />
 

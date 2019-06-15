@@ -19,6 +19,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,7 +41,7 @@ public class IniciarPerfiles extends AppCompatActivity {
     List<MatesPorDia> matesPorDiaList = new ArrayList<MatesPorDia>();
     MatesPorDia ultimoMate;
 
-    long cantidadAzucarTotal = 0;
+    String fechaDeHoy;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +54,8 @@ public class IniciarPerfiles extends AppCompatActivity {
         inicializarFirebase();
 
         ListarDatos();
+
+        fechaDeHoy = TimePickerFragment.obtenerFechaDeHoy();
 
         listaPerfiles.setOnItemClickListener(new AdapterView.OnItemClickListener(){
 
@@ -70,10 +75,16 @@ public class IniciarPerfiles extends AppCompatActivity {
                 databaseReference.child("cantAzucar").setValue(Integer.parseInt(perfilSeleccionado.getAzucar()));
                 databaseReference.child("funcionaConMicrofono").setValue(1);
 
-                int cantidadDeAzucar = ultimoMate.getAzucar() + Integer.parseInt(perfilSeleccionado.getAzucar());
+                int cantidadDeAzucar = Integer.parseInt(perfilSeleccionado.getAzucar());
 
-                MatesPorDia mate = new MatesPorDia(ultimoMate.getId(), ultimoMate.getFecha(), ultimoMate.getMates(), cantidadDeAzucar);
-                databaseReference.child("MatesPorDia").child(mate.getId()).setValue(mate);
+                if(ultimoMate != null && Integer.parseInt(ultimoMate.getFecha()) == Integer.parseInt(fechaDeHoy)){
+                    MatesPorDia mate = new MatesPorDia(ultimoMate.getId(), ultimoMate.getFecha(), ultimoMate.getMates()+1, ultimoMate.getAzucar() + cantidadDeAzucar);
+                    databaseReference.child("MatesPorDia").child(mate.getId()).setValue(mate);
+                }
+                else{
+                    MatesPorDia mate = new MatesPorDia(fechaDeHoy, fechaDeHoy, 1, cantidadDeAzucar);
+                    databaseReference.child("MatesPorDia").child(mate.getId()).setValue(mate);
+                }
 
                 Toast.makeText(IniciarPerfiles.this,"A Disfrutar del mejor mate!", Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(v.getContext(), MainActivity.class);
@@ -132,7 +143,6 @@ public class IniciarPerfiles extends AppCompatActivity {
         });
 
     }
-
 
     private void inicializarFirebase() {
         FirebaseApp.initializeApp(this);

@@ -13,51 +13,62 @@
         android:background="@drawable/fondoazul"
         android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/imageView"
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="320dp"
-            app:srcCompat="@drawable/logosmartenew" />
+            android:layout_height="match_parent">
 
-        <Button
-            android:id="@+id/iniciarButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="50px"
-            android:background="@android:drawable/toast_frame"
-            android:text="Empezar a cebar" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
 
-        <Button
-            android:id="@+id/configurarButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10px"
-            android:background="@android:drawable/toast_frame"
-            android:text="Configurar perfiles cebador" />
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="match_parent"
+                    android:layout_height="320dp"
+                    app:srcCompat="@drawable/logosmartenew" />
 
-        <Button
-            android:id="@+id/programarButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10px"
-            android:background="@android:drawable/toast_frame"
-            android:text="Programar horarios" />
+                <Button
+                    android:id="@+id/iniciarButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="50px"
+                    android:background="@android:drawable/toast_frame"
+                    android:text="Empezar a cebar" />
 
-        <Button
-            android:id="@+id/panelControlButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10px"
-            android:background="@android:drawable/toast_frame"
-            android:text="Panel De Control" />
+                <Button
+                    android:id="@+id/configurarButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10px"
+                    android:background="@android:drawable/toast_frame"
+                    android:text="Configurar perfiles cebador" />
 
-        <Button
-            android:id="@+id/statsButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10px"
-            android:background="@android:drawable/toast_frame"
-            android:text="Estadísticas" />
+                <Button
+                    android:id="@+id/programarButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10px"
+                    android:background="@android:drawable/toast_frame"
+                    android:text="Programar horarios" />
+
+                <Button
+                    android:id="@+id/panelControlButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10px"
+                    android:background="@android:drawable/toast_frame"
+                    android:text="Panel De Control" />
+
+                <Button
+                    android:id="@+id/statsButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10px"
+                    android:background="@android:drawable/toast_frame"
+                    android:text="Estadísticas" />
+            </LinearLayout>
+        </ScrollView>
 
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

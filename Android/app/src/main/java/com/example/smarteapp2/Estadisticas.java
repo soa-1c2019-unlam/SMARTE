@@ -1,11 +1,17 @@
 package com.example.smarteapp2;
 
+import android.content.res.ColorStateList;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.google.firebase.FirebaseApp;
@@ -30,6 +36,13 @@ public class Estadisticas extends AppCompatActivity {
     TextView azucarUsada;
     TextView azucarPorMate;
     TextView maximaCantidad;
+    TextView reporteAgua;
+    TextView reporteAzucar;
+    TextView porcentajeAgua;
+    TextView porcentajeAzucar;
+
+    ProgressBar progressAgua;
+    ProgressBar progressAzucar;
 
     MatesPorDia ultimoMate;
 
@@ -44,6 +57,8 @@ public class Estadisticas extends AppCompatActivity {
     float promedioDeMatesPorDia;
     float promedioDeAzucarPorMate;
 
+    int matesDelDia = 0;
+
     List<MatesPorDia> matesPorDiaList = new ArrayList<MatesPorDia>();
 
     @Override
@@ -57,7 +72,20 @@ public class Estadisticas extends AppCompatActivity {
         azucarPorMate = findViewById(R.id.textViewPromedioAzucarPorMate);
         maximaCantidad = findViewById(R.id.textViewMaximaCantidadEnUnDia);
 
+        porcentajeAgua = findViewById(R.id.textViewPorcentajeAgua);
+        porcentajeAzucar = findViewById(R.id.textViewPorcentajeAzucar);
+
+        reporteAgua = findViewById(R.id.textViewReporteAgua);
+        reporteAzucar = findViewById(R.id.textViewReporteAzucar);
+        reporteAzucar.setTextColor(Color.BLUE);
+
+        progressAgua = findViewById(R.id.progressBarAgua);
+        progressAzucar = findViewById(R.id.progressBarAzucar);
+
+
         inicializarFirebase();
+
+        fechaDeHoy = TimePickerFragment.obtenerFechaDeHoy();
 
         estadisticas = new updateStats();
         estadisticas.execute();
@@ -70,54 +98,100 @@ public class Estadisticas extends AppCompatActivity {
         databaseReference = firebaseDataBase.getReference();
     }
 
+    /**
+     * Lee en firebase las variables para calcular las cantidades totales de mates y azucar
+     * y genera las estadisticas.
+     */
     private class updateStats extends AsyncTask<Void, Integer, Boolean>{
 
         @Override
         protected Boolean doInBackground(Void... voids) {
 
-
+            //region Escucho la coleccion MatesPorDia de firebase
             databaseReference.child("MatesPorDia").addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    matesPorDiaList.clear();
                     for (DataSnapshot objSnapShot : dataSnapshot.getChildren()){
                         MatesPorDia p = new MatesPorDia(objSnapShot.getValue(MatesPorDia.class));
                         matesPorDiaList.add(p);
+                    }
 
-                        cantidadDeDias = matesPorDiaList.size();
+                    cantidadDeDias = matesPorDiaList.size();
 
-                        if (matesPorDiaList.size() > 0){
-                            String fecha = matesPorDiaList.get(matesPorDiaList.size()-1).getFecha();
-                            int mates = matesPorDiaList.get(matesPorDiaList.size()-1).getMates();
-                            String id = matesPorDiaList.get(matesPorDiaList.size()-1).getId();
-                            int azucar = matesPorDiaList.get(matesPorDiaList.size()-1).getAzucar();
+                    if (cantidadDeDias > 0){
+                        //region Obtener datos del ultimo dia que se tomo mate
+                        String fecha = matesPorDiaList.get(matesPorDiaList.size()-1).getFecha();
+                        int mates = matesPorDiaList.get(matesPorDiaList.size()-1).getMates();
+                        String id = matesPorDiaList.get(matesPorDiaList.size()-1).getId();
+                        int azucar = matesPorDiaList.get(matesPorDiaList.size()-1).getAzucar();
+                        ultimoMate = new MatesPorDia(id, fecha, mates, azucar);
+                        //endregion
 
-                            ultimoMate = new MatesPorDia(id, fecha, mates, azucar);
+                        //region Seteo de progresos diarios
+                        if (Integer.parseInt(ultimoMate.getFecha()) == Integer.parseInt(fechaDeHoy)){
+                            int porcentajeDeAguaDiario = (ultimoMate.getMates() * 100) / 50;
+                            progressAgua.setProgress(porcentajeDeAguaDiario);
+
+                            porcentajeAgua.setText(porcentajeDeAguaDiario + "%");
+
+                            if (porcentajeDeAguaDiario == 100){
+                                reporteAzucar.setText("• Llegaste al objetivo de agua diaria, felicitaciones!");
+                                reporteAzucar.setTextColor(Color.BLUE);
+                                porcentajeAgua.setTextColor(Color.BLUE);
+                            }
+
+                            int porcentajeDeAzucarDiario = (ultimoMate.getAzucar() * 100) / 10;
+                            if (porcentajeDeAzucarDiario > 60 && porcentajeDeAzucarDiario < 100 ){
+                                porcentajeAzucar.setTextColor(Color.RED);
+                                reporteAzucar.setText("• Cuidado! máximo consumo de azucar cerca");
+                                reporteAzucar.setTextColor(Color.RED);
+                            }
+
+                            if (porcentajeDeAzucarDiario >= 100){
+                                porcentajeDeAzucarDiario = 100;
+                                porcentajeAzucar.setTextColor(Color.RED);
+                                reporteAzucar.setText("• Diabetes Alert! aflojale al azucar");
+                                reporteAzucar.setTextColor(Color.RED);
+                                progressAzucar.getProgressDrawable().setColorFilter(
+                                        Color.RED, android.graphics.PorterDuff.Mode.SRC_IN);
+                            }
+                            porcentajeAzucar.setText(porcentajeDeAzucarDiario + "%");
+
+                            progressAzucar.setProgress(porcentajeDeAzucarDiario);
                         }
-
-                        if(cantidadDeDias != 0){
-
-                            cantidadTotalDeMates = calcularCantidadDeMates();
-                            matesTomados.setText(String.valueOf(cantidadTotalDeMates));
-
-                            promedioDeMatesPorDia = cantidadTotalDeMates / cantidadDeDias;
-                            promedioPorDia.setText(String.valueOf(promedioDeMatesPorDia));
-
-                            cantidadTotalDeAzucar = calcularCantidadDeAzucar();
-                            azucarUsada.setText(String.valueOf(cantidadTotalDeAzucar));
-                            promedioDeAzucarPorMate = cantidadTotalDeAzucar / cantidadTotalDeMates;
-                            azucarPorMate.setText(String.valueOf(promedioDeAzucarPorMate));
-
-                            Collections.sort(matesPorDiaList, new ComparadorDeFechas());
-                            int cantidadDeMatesMax = matesPorDiaList.get(0).getMates();
-                            String fechaMax = matesPorDiaList.get(0).getFecha();
-                            String id = matesPorDiaList.get(0).getId();
-                            int cantidadAzucar = matesPorDiaList.get(0).getAzucar();
-
-                            maximoMatePorDia = new MatesPorDia(id , fechaMax, cantidadDeMatesMax, cantidadAzucar);
-
-                            maximaCantidad.setText(maximoMatePorDia.toString());
-
+                        else{
+                            progressAgua.setProgress(0);
+                            porcentajeAzucar.setText(0);
+                            porcentajeAgua.setText(0);
+                            progressAzucar.setProgress(0);
                         }
+                        //endregion
+
+                        //region Calcular y setear estadisticas
+                        cantidadTotalDeMates = calcularCantidadDeMates();
+                        matesTomados.setText(String.valueOf(cantidadTotalDeMates));
+
+                        promedioDeMatesPorDia = cantidadTotalDeMates / cantidadDeDias;
+                        promedioPorDia.setText(String.valueOf(promedioDeMatesPorDia));
+
+                        cantidadTotalDeAzucar = calcularCantidadDeAzucar();
+                        azucarUsada.setText(String.valueOf(cantidadTotalDeAzucar));
+                        promedioDeAzucarPorMate = cantidadTotalDeAzucar / cantidadTotalDeMates;
+                        azucarPorMate.setText(String.valueOf(promedioDeAzucarPorMate));
+                        //endregion
+
+                        //region Obtener dia que mas mates se tomo
+                        Collections.sort(matesPorDiaList, new ComparadorDeFechas());
+                        int cantidadDeMatesMax = matesPorDiaList.get(0).getMates();
+                        String fechaMax = matesPorDiaList.get(0).getFecha();
+                        String idMax = matesPorDiaList.get(0).getId();
+                        int cantidadAzucar = matesPorDiaList.get(0).getAzucar();
+
+                        maximoMatePorDia = new MatesPorDia(idMax , fechaMax, cantidadDeMatesMax, cantidadAzucar);
+
+                        maximaCantidad.setText(maximoMatePorDia.toString());
+                        //endregion
                     }
                 }
 
@@ -126,7 +200,9 @@ public class Estadisticas extends AppCompatActivity {
 
                 }
             });
+            //endregion
 
+            //region Escucho la variable bomba de firebase
             databaseReference.child("bomba").addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -148,6 +224,7 @@ public class Estadisticas extends AppCompatActivity {
 
                 }
             });
+            //endregion
 
             return true;
         }
