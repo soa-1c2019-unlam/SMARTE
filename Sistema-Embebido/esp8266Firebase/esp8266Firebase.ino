@@ -33,15 +33,19 @@ void setup()
 
 void loop()
 {    
+  
   if(Firebase.getInt("servoYerba"))
   {
     Serial.println("servoYerba/1");
     String txt = Serial.readString();
     while(!(txt.indexOf("servoYerba/OFF")>-1)){
+      if(!(txt.indexOf("matePuesto/no")>-1)){
+        Firebase.setInt("matePuesto",0);  
+      }
       txt = Serial.readString();
-      
     }
-    Firebase.setInt("servoYerba",0);  
+    Firebase.setInt("servoYerba",0);
+    Firebase.setInt("matePuesto",1);  
   }
   
   if(Firebase.getInt("servoAzucar"))
@@ -66,6 +70,7 @@ void loop()
     Firebase.setInt("bomba",0);
   }
 
+  
   
   if (Firebase.failed()) {    
     Serial.print("Failed communicating to Firebase");    
