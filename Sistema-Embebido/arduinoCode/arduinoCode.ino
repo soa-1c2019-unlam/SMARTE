@@ -1,5 +1,7 @@
 #include <SoftwareSerial.h>
 #include <Servo.h>
+#include <dht.h>
+
 
 /////////Funciones/////////
 int readline();
@@ -10,6 +12,8 @@ void atenderTermometro();
 long readUltrasonicDistance();
 long medirDistancia();
 long promedioUltra();
+int parseTemp();
+int filterTemp(float);
 
 /////////Variables Generales/////////
 SoftwareSerial esp(3,2);
@@ -58,8 +62,18 @@ bool soundState = false;
 
 /////////Variables Termometro/////////
 long timeTerm = millis();
-long waitTerm = 800;
+const long waitTerm = 800;
 bool stateTerm = true;
+dht DHT;
+const int pwmLed = 5;
+int nivelLed;
+const int maxTemp = 40;
+const int minTemp = 15;
+float tempActual;
+const int tempLed = 4;
+float iniTemp = 0;
+bool firstTemp = true;
+
 
 void setup() {
   Serial.begin(9600);
@@ -200,8 +214,44 @@ void atenderBomba(){
 }
 
 void atenderTermometro(){
-  esp.println("termometro/OFF");
+  DHT.read11(dht_apin);
+  tempActual = DHT.temperature;
+  
+  if(firstTemp){
+    iniTemp = tempActual-1;
+    firstTemp = false;
+  }
+  if(tempActual > maxTemp){
+    analogWrite(pwmLed,0);
+    digitalWrite(tempLed,HIGH);
+    Serial.print("Temperatura = ");
+    Serial.print(tempActual);
+    Serial.println("ºC");
+    stateTerm = true;
+    esp.println("termometro/OFF");
+  }//Aca se aplica la histeresis
+  else if(tempActual < (maxTemp - 1) && tempActual > minTemp){
+    digitalWrite(tempLed,LOW);
+    Serial.print("Temperatura = ");
+    Serial.print(tempActual);
+    Serial.println("ºC");
+    lvl = parseTemp(tempActual);
+    analogWrite(pwmLed, lvl);
+    stateTerm = false;
+  }
+
 }
+
+int parseTemp(float temp){
+  float value = maxTemp;
+  float aux;
+  value = value - temp;
+  aux = (-1)*(((value*200)/iniTemp)-200);
+  Serial.println(aux);
+  
+  return (int) aux;
+}
+
 
 long readUltrasonicDistance(){
 
