@@ -1,87 +1,4 @@
-#include <SoftwareSerial.h>
-#include <Servo.h>
-#include <dht.h>
-
-
-/////////Funciones/////////
-int readline();
-void atenderYerba();
-void atenderAzucar();
-void atenderBomba();
-void atenderTermometro();
-long readUltrasonicDistance();
-long medirDistancia();
-long promedioUltra();
-int parseTemp();
-int filterTemp(float);
-
-/////////Variables Generales/////////
-SoftwareSerial esp(3,2);
-String data = "";
-
-/////////Variables Servos/////////
-Servo servoYb;
-Servo servoAz;
-int posServoYb = 120;
-int posServoAz = 80;
-
-long timeYb = millis();
-long waitYb = 800;
-bool stateYb = true;
-bool seguirMidiendoYb = false;
-
-long timeAz = millis();
-long waitAz = 400;
-bool stateAz = true;
-int cantAzucar = 1;
-bool seguirMidiendoAz = false;
-
-
-/////////Variables UltraSonido/////////
-#define MEDIR_USONIDO 9999
-int triggerPin = 10;
-int echoPin = 9;
-long cm;
-const int mediciones = 10; 
-long aux[mediciones]; 
-int iUltra = 0;
-bool yaAbri = false;
-bool stateDistancia = true;
-long timeDistancia = millis();
-
-
-/////////Variables Bomba/////////
-int rele = 6;
-long timeBom = millis();
-long waitBom = 2000;
-bool stateBom = true;
-bool seguirMidiendoBom = false;
-
-/////////Variables Microfono/////////
-const int soundSensor = A2;
-int soundValue = 0;
-//bool soundState = false;
-long timeSound = millis();
-const long delaySound = 1000;
-long waitSound = millis();
-const long delayWaitSound = 50;
-bool primerClap = true;
-
-/////////Variables Termometro/////////
-long timeTerm = millis();
-const long waitTerm = 800;
-bool stateTerm = true;
-#define dht_apin A0
-dht DHT;
-const int pwmLed = 5;
-int nivelLed;
-const int maxTemp = 40;
-const int minTemp = 15;
-float tempActual;
-const int tempLed = 4;
-float iniTemp = 0;
-bool firstTemp = true;
-
+#include "smarte.h"
 
 void setup() {
   Serial.begin(9600);
@@ -95,12 +12,18 @@ void setup() {
   pinMode(triggerPin,OUTPUT);
   pinMode(echoPin,INPUT);
   pinMode(rele,OUTPUT);
+  pinMode(ledSinMate,OUTPUT);
+  pinMode(pwmLed,OUTPUT);
+  pinMode(tempLed,OUTPUT);
  
 }
 
 void loop() {
-  /*soundValue = analogRead(soundSensor );
-  if(soundValue > 100){
+
+  //Deteccion de aplauso
+  soundValue = analogRead(soundSensor );
+  if(soundValue > umbralSonido){
+    Serial.println(soundValue);
     if(primerClap){
       timeSound = millis();
       waitSound = millis();
@@ -110,61 +33,69 @@ void loop() {
       if((millis()- waitSound)>delayWaitSound){
         if((millis()- timeSound) < delaySound){
           primerClap = true;
-          atenderBomba();  
+          bombaAplauso = true;
+          atenderBombaAplauso();
         }
       }      
     }
   }
-  
   if((millis()- timeSound) > delaySound){
     primerClap = true;
   }
+  if(bombaAplauso){
+    atenderBombaAplauso();
+  }
 
-  */
+  //Lectura de Serial del ESP
   if(esp.available() > 0){
     data = esp.readStringUntil('\n');
     Serial.println(data);
   }
   
   if(data.indexOf("servoYerba/1")>-1 || !stateYb || seguirMidiendoYb){
-    Serial.println(data);
     atenderYerba();
   }
-  else if(data.indexOf("servoAzucar/")>-1 || !stateAz || seguirMidiendoAz){
-    Serial.println(data);
-    if(stateAz){
+  if(data.indexOf("servoAzucar/")>-1 || !stateAz || seguirMidiendoAz){
+    if(boolCantAz){
+      //Obtengo cantidad de azucar
       cantAzucar = data.substring(12,13).toInt();
-      Serial.print("Cantidad de azucar: ");
-      Serial.println(cantAzucar);
-      stateAz = false;
+      boolCantAz = false;
     }
     atenderAzucar();
-    Serial.println("Sali de func azucar");
   }
-  else if(data.indexOf("bomba/1")>-1 || !stateBom || seguirMidiendoBom){
+  if(data.indexOf("bomba/1")>-1 || !stateBom || seguirMidiendoBom){
+    Serial.print("Estado Bomba: ");
+    Serial.println(stateBom);
+    Serial.print("Seguir midiendo bom: ");
+    Serial.println(seguirMidiendoBom);
+    Serial.println(data);
+    
     atenderBomba();
   }
-  else if(data.indexOf("termometro/1")>-1 || !stateTerm){
+  if(data.indexOf("termometro/1")>-1 || !stateTerm){
+    digitalWrite(tempLed,LOW);
     atenderTermometro();
   }
 
   data = "";
+  
 }
 
 void atenderYerba(){
+
+  //Checkequeo si ya detecte que estaba cerca el mate
   if(!yaAbri){
     cm = medirDistancia();
   }
-  Serial.print("Distancia medida: ");
-  Serial.println(cm);
+  //Checkequeo distancia del mate
   if((cm <= 10 && cm > 0)){
+    digitalWrite(ledSinMate, LOW);
     if(stateYb){
       timeYb = millis();
       stateYb = false;
       servoYb.write(posServoYb);
       yaAbri = true;
-      Serial.println("Abro yerba");
-    }
+   }
     if((millis() - timeYb) > waitYb){
       servoYb.write(0);
       stateYb = true;
@@ -172,12 +103,13 @@ void atenderYerba(){
       esp.println("servoYerba/OFF");
     }
     seguirMidiendoYb = false;
-  }
+  }//Si no se detecta el mate se lo comunico al ESP
   else if ( cm != MEDIR_USONIDO ){
     esp.println("matePuesto/OFF");
     seguirMidiendoYb = false;
     yaAbri = false;
-  }
+    digitalWrite(ledSinMate, HIGH);
+  }//MEDIR_USONIDO es la variable que me indica si debo continuar la medicion (para obetener un promedio)
   if(cm == MEDIR_USONIDO){
     seguirMidiendoYb = true;
   }
@@ -187,12 +119,8 @@ void atenderAzucar(){
   if(!yaAbri){
     cm = medirDistancia();
   }    
-  Serial.print("Cant azucar en funcion: ");
-  Serial.println(cantAzucar);
-  Serial.print("CM antes de entrar en azucar: ");
-  Serial.println(cm);
   if(cm <= 10 && cm > 0){
-    Serial.println(cantAzucar);
+    digitalWrite(ledSinMate, LOW);
     if(cantAzucar > 0){
       if(stateAz){
         timeAz = millis();
@@ -203,17 +131,15 @@ void atenderAzucar(){
       if((millis() - timeAz) > waitAz){
         servoAz.write(0);
         stateAz = true;
-        yaAbri = false;
-        
+        cantAzucar = cantAzucar - 1;
       }
-      cantAzucar = cantAzucar - 1;
-      Serial.print("resto azucar");
-      Serial.println(cantAzucar);
     }
     else{
       seguirMidiendoAz = false;
       esp.println("servoAzucar/OFF");
       stateAz = true;
+      boolCantAz = true;
+      yaAbri = false;
     }
   }
   else if ( cm != MEDIR_USONIDO){
@@ -221,25 +147,32 @@ void atenderAzucar(){
     seguirMidiendoAz = false;
     yaAbri = false;
     stateAz = true;
+    boolCantAz = true;
+    digitalWrite(ledSinMate, HIGH);
   }
   if(cm == MEDIR_USONIDO){
     seguirMidiendoAz = true;
   }
-    
-  Serial.print("Cant azucar saliendo de funcion: ");
-  Serial.println(cantAzucar);
   
 }
 
 void atenderBomba(){
   if(!yaAbri){
     cm = medirDistancia();
+    Serial.print("CM medido: ");
+    Serial.println(cm);
+    
   }  
+  Serial.print("Estado Bomba: ");
+  Serial.println(stateBom);
+    
   if(cm <= 10 && cm > 0){
+    digitalWrite(ledSinMate, LOW);
     if(stateBom){
       timeBom = millis();
       stateBom = false;
       yaAbri = true;
+      Serial.println("Abro rele");
       digitalWrite(rele,HIGH);
     }
 
@@ -247,6 +180,7 @@ void atenderBomba(){
       digitalWrite(rele,LOW);
       stateBom = true;
       yaAbri = false;
+      Serial.println("Apago Bomba");
       esp.println("bomba/OFF");
     }
     seguirMidiendoBom = false;
@@ -255,10 +189,44 @@ void atenderBomba(){
     esp.println("matePuesto/OFF");
     seguirMidiendoBom = false;
     yaAbri = false;
+    digitalWrite(ledSinMate, HIGH);
   }
   if(cm == MEDIR_USONIDO){
     seguirMidiendoBom = true;
   }
+}
+
+
+void atenderBombaAplauso(){
+  if(!yaAbri){
+    cm = medirDistancia();
+    Serial.print("CM medido: ");
+    Serial.println(cm);
+  }  
+  if(cm <= 10 && cm > 0){
+    digitalWrite(ledSinMate, LOW);
+    if(stateAplauso){
+      timeBom = millis();
+      stateAplauso = false;
+      yaAbri = true;
+      Serial.println("Abro rele");
+      digitalWrite(rele,HIGH);
+    }
+
+    if((millis() - timeBom) > waitBom){
+      digitalWrite(rele,LOW);
+      stateAplauso= true;
+      yaAbri = false;
+      bombaAplauso = false;
+      Serial.println("Apago Bomba");
+    }
+    
+  }
+  else if ( cm != MEDIR_USONIDO ){
+    digitalWrite(ledSinMate, HIGH);
+    yaAbri = false;
+  }
+  
 }
 
 void atenderTermometro(){
@@ -267,6 +235,9 @@ void atenderTermometro(){
   
   if(firstTemp){
     iniTemp = tempActual-1;
+    Serial.print("Primer temp: ");
+    Serial.println(iniTemp);
+    
     firstTemp = false;
   }
   if(tempActual > maxTemp){
