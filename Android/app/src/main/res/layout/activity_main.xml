@@ -45,14 +45,6 @@
                     android:text="Configurar perfiles cebador" />
 
                 <Button
-                    android:id="@+id/programarButton"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10px"
-                    android:background="@android:drawable/toast_frame"
-                    android:text="Programar horarios" />
-
-                <Button
                     android:id="@+id/panelControlButton"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
