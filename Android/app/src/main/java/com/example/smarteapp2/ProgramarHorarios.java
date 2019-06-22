@@ -55,7 +55,13 @@ public class ProgramarHorarios extends AppCompatActivity implements TimePickerDi
 
         spinnerPerfiles.setEnabled(false);
 
-        inicializarFirebase();
+        //region inicializar firebase
+        InicializarFirebase firebase = new InicializarFirebase();
+        firebase.inicializar(getApplicationContext());
+        firebaseDataBase = firebase.getFirebaseDataBase();
+        databaseReference = firebase.getDatabaseReference();
+        //endregion
+
 
         ListarDatos();
 
@@ -137,9 +143,4 @@ public class ProgramarHorarios extends AppCompatActivity implements TimePickerDi
         });
     }
 
-    private void inicializarFirebase() {
-        FirebaseApp.initializeApp(this);
-        firebaseDataBase = FirebaseDatabase.getInstance();
-        databaseReference = firebaseDataBase.getReference();
-    }
 }

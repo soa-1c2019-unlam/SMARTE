@@ -83,19 +83,19 @@ public class Estadisticas extends AppCompatActivity {
         progressAzucar = findViewById(R.id.progressBarAzucar);
 
 
-        inicializarFirebase();
+        //region inicializar firebase
+        InicializarFirebase firebase = new InicializarFirebase();
+        firebase.inicializar(getApplicationContext());
+        firebaseDataBase = firebase.getFirebaseDataBase();
+        databaseReference = firebase.getDatabaseReference();
+        //endregion
+
 
         fechaDeHoy = TimePickerFragment.obtenerFechaDeHoy();
 
         estadisticas = new updateStats();
         estadisticas.execute();
 
-    }
-
-    private void inicializarFirebase() {
-        FirebaseApp.initializeApp(this);
-        firebaseDataBase = FirebaseDatabase.getInstance();
-        databaseReference = firebaseDataBase.getReference();
     }
 
     /**

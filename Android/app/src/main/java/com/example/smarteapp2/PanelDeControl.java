@@ -26,7 +26,14 @@ public class PanelDeControl extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_panel_de_control);
-        inicializarFirebase();
+
+        //region inicializar firebase
+        InicializarFirebase firebase = new InicializarFirebase();
+        firebase.inicializar(getApplicationContext());
+        firebaseDataBase = firebase.getFirebaseDataBase();
+        databaseReference = firebase.getDatabaseReference();
+        //endregion
+
 
         Button btnUpdate = findViewById(R.id.updateBtn);
         btnUpdate.setOnClickListener(new View.OnClickListener() {
@@ -104,10 +111,5 @@ public class PanelDeControl extends AppCompatActivity {
         });
     }
 
-    private void inicializarFirebase() {
-        FirebaseApp.initializeApp(this);
-        firebaseDataBase = FirebaseDatabase.getInstance();
-        databaseReference = firebaseDataBase.getReference();
-    }
 
 }
