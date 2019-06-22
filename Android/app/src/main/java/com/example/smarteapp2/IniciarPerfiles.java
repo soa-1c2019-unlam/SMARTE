@@ -51,7 +51,13 @@ public class IniciarPerfiles extends AppCompatActivity {
         listaPerfiles = findViewById(R.id.listaPerfiles);
         iniciarPerfilButton = findViewById(R.id.iniciarPerfilbutton);
 
-        inicializarFirebase();
+        //region inicializar firebase
+        InicializarFirebase firebase = new InicializarFirebase();
+        firebase.inicializar(getApplicationContext());
+        firebaseDataBase = firebase.getFirebaseDataBase();
+        databaseReference = firebase.getDatabaseReference();
+        //endregion
+
 
         ListarDatos();
 
@@ -144,9 +150,5 @@ public class IniciarPerfiles extends AppCompatActivity {
 
     }
 
-    private void inicializarFirebase() {
-        FirebaseApp.initializeApp(this);
-        firebaseDataBase = FirebaseDatabase.getInstance();
-        databaseReference = firebaseDataBase.getReference();
-    }
+
 }

@@ -50,7 +50,13 @@ public class ConfigurarPerfiles extends AppCompatActivity {
         txtAzucar = findViewById(R.id.azucarEditText);
         txtNombre = findViewById(R.id.nombreEditText);
 
-        inicializarFirebase();
+        //region inicializar firebase
+        InicializarFirebase firebase = new InicializarFirebase();
+        firebase.inicializar(getApplicationContext());
+        firebaseDataBase = firebase.getFirebaseDataBase();
+        databaseReference = firebase.getDatabaseReference();
+        //endregion
+
 
         ListarDatos();
 
@@ -86,11 +92,6 @@ public class ConfigurarPerfiles extends AppCompatActivity {
         });
     }
 
-    private void inicializarFirebase() {
-        FirebaseApp.initializeApp(this);
-        firebaseDataBase = FirebaseDatabase.getInstance();
-        databaseReference = firebaseDataBase.getReference();
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
