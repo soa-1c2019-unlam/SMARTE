@@ -167,9 +167,36 @@
                     android:layout_marginTop="10px"
                     android:layout_marginBottom="10px"
                     android:text="Porcentajes diarios saludables"
-                    android:textAlignment="center"
+                    android:textColor="#EE000000"
+                    android:textSize="30sp"
+                    android:textStyle="bold"
+                    android:textAlignment="center"/>
+
+                <TextView
+                    android:id="@+id/textViewMatesDi"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10px"
+                    android:text="Mates tomados en el día"
                     android:textColor="#FA090000"
                     android:textSize="24sp" />
+
+                <TextView
+                    android:id="@+id/textViewMatesEnElDia"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30px"
+                    android:text=""
+                    android:textAlignment="center"
+                    android:textColor="#030B30"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+
+                <View
+                    android:id="@+id/dividerx"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="?android:attr/listDivider" />
 
                 <LinearLayout
                     android:layout_width="match_parent"

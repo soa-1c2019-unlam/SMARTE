@@ -13,6 +13,7 @@ public class IniciarCebador extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_iniciar_cebador);
 
+        //region Apretar boton Custom
         Button btnCustom = findViewById(R.id.customButton);
         btnCustom.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -21,7 +22,9 @@ public class IniciarCebador extends AppCompatActivity {
                 startActivityForResult(intent, 0);
             }
         });
+        //endregion
 
+        //region Apretar boton iniciar perfiles
         Button btnIniciarPerfiles = findViewById(R.id.opcionPerfilesButton);
         btnIniciarPerfiles.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -30,5 +33,6 @@ public class IniciarCebador extends AppCompatActivity {
                 startActivityForResult(intent, 0);
             }
         });
+        //endregion
     }
 }
