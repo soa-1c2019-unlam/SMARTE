@@ -31,18 +31,19 @@ public class Estadisticas extends AppCompatActivity {
     FirebaseDatabase firebaseDataBase;
     DatabaseReference databaseReference;
 
-    TextView matesTomados;
-    TextView promedioPorDia;
-    TextView azucarUsada;
-    TextView azucarPorMate;
-    TextView maximaCantidad;
-    TextView reporteAgua;
-    TextView reporteAzucar;
-    TextView porcentajeAgua;
-    TextView porcentajeAzucar;
+    TextView matesTomados,
+             promedioPorDia,
+             azucarUsada,
+             azucarPorMate,
+             maximaCantidad,
+             reporteAgua,
+             reporteAzucar,
+             porcentajeAgua,
+             porcentajeAzucar,
+             matesEnElDia;
 
-    ProgressBar progressAgua;
-    ProgressBar progressAzucar;
+    ProgressBar progressAgua,
+                progressAzucar;
 
     MatesPorDia ultimoMate;
 
@@ -71,6 +72,7 @@ public class Estadisticas extends AppCompatActivity {
         azucarUsada = findViewById(R.id.textViewAzucarUsado);
         azucarPorMate = findViewById(R.id.textViewPromedioAzucarPorMate);
         maximaCantidad = findViewById(R.id.textViewMaximaCantidadEnUnDia);
+        matesEnElDia = findViewById(R.id.textViewMatesEnElDia);
 
         porcentajeAgua = findViewById(R.id.textViewPorcentajeAgua);
         porcentajeAzucar = findViewById(R.id.textViewPorcentajeAzucar);
@@ -90,12 +92,10 @@ public class Estadisticas extends AppCompatActivity {
         databaseReference = firebase.getDatabaseReference();
         //endregion
 
-
         fechaDeHoy = TimePickerFragment.obtenerFechaDeHoy();
 
         estadisticas = new updateStats();
         estadisticas.execute();
-
     }
 
     /**
@@ -159,12 +159,15 @@ public class Estadisticas extends AppCompatActivity {
                             porcentajeAzucar.setText(porcentajeDeAzucarDiario + "%");
 
                             progressAzucar.setProgress(porcentajeDeAzucarDiario);
+
+                            matesEnElDia.setText(String.valueOf(ultimoMate.getMates()));
                         }
                         else{
                             progressAgua.setProgress(0);
                             porcentajeAzucar.setText(0);
                             porcentajeAgua.setText(0);
                             progressAzucar.setProgress(0);
+                            matesEnElDia.setText(0);
                         }
                         //endregion
 

@@ -33,15 +33,18 @@ public class MateAlGustoActivity extends AppCompatActivity implements SensorEven
     FirebaseDatabase firebaseDataBase;
     DatabaseReference databaseReference;
 
-    Button botonAzucar, botonYerba, botonAgua, botonCalentarAgua;
+    Button botonAzucar,
+           botonYerba,
+           botonAgua,
+           botonCalentarAgua;
+
     List<MatesPorDia> matesPorDiaList = new ArrayList<MatesPorDia>();
     MatesPorDia ultimoMate;
     boolean matePuesto = true;
-
     String fechaDeHoy;
     fechasEnBase fechasMate;
 
-    //DEFINICION SENSORES A USAR EN ANDROID
+    //region variables para sensores
     private SensorManager sm;
     Sensor sensorAcel;
     Sensor sensorProx;
@@ -49,12 +52,19 @@ public class MateAlGustoActivity extends AppCompatActivity implements SensorEven
     private float aceleracion;
     private float ultAceleracion;
     private float shake;
+    //endregion
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mate_al_gusto);
+
+        botonAgua = findViewById(R.id.colocarAguaButton);
+        botonAzucar = findViewById(R.id.azucarButton);
+        botonYerba = findViewById(R.id.yerbaButton);
+        botonCalentarAgua = findViewById(R.id.calentarAguaButton);
+
 
         //region inicializar firebase
         InicializarFirebase firebase = new InicializarFirebase();
@@ -64,11 +74,6 @@ public class MateAlGustoActivity extends AppCompatActivity implements SensorEven
         //endregion
 
         fechaDeHoy = TimePickerFragment.obtenerFechaDeHoy();
-
-        botonAgua = findViewById(R.id.colocarAguaButton);
-        botonAzucar = findViewById(R.id.azucarButton);
-        botonYerba = findViewById(R.id.yerbaButton);
-        botonCalentarAgua = findViewById(R.id.calentarAguaButton);
 
         fechasMate = new fechasEnBase();
         fechasMate.execute();

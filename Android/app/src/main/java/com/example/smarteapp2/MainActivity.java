@@ -35,17 +35,6 @@ public class MainActivity extends AppCompatActivity {
         });
         //endregion
 
-        //region Si click en boton Horario
-        Button btnHorarios = findViewById(R.id.programarButton);
-        btnHorarios.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), ProgramarHorarios.class);
-                startActivityForResult(intent, 0);
-            }
-        });
-        //endregion
-
         //region Si click en boton panel de control
         Button btnPanelControl = findViewById(R.id.panelControlButton);
         btnPanelControl.setOnClickListener(new View.OnClickListener() {
@@ -68,4 +57,10 @@ public class MainActivity extends AppCompatActivity {
         });
         //endregion
     }
+
+    protected void onDestroy()
+    {
+        super.onDestroy();
+    }
+
 }
