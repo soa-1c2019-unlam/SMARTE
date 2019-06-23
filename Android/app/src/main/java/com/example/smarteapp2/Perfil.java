@@ -7,7 +7,6 @@ public class Perfil {
     String nombre;
 
     public Perfil(){
-
     }
 
     public Perfil (String id, String nombre, String yerba, String azucar){

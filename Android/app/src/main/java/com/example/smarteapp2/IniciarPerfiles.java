@@ -39,7 +39,7 @@ public class IniciarPerfiles extends AppCompatActivity {
     Button iniciarPerfilButton;
 
     List<MatesPorDia> matesPorDiaList = new ArrayList<MatesPorDia>();
-    MatesPorDia ultimoMate;
+    MatesPorDia ultimoMate = new MatesPorDia();
 
     String fechaDeHoy;
 
@@ -130,15 +130,10 @@ public class IniciarPerfiles extends AppCompatActivity {
                 for (DataSnapshot objSnapShot : dataSnapshot.getChildren()){
                     MatesPorDia p = new MatesPorDia(objSnapShot.getValue(MatesPorDia.class));
                     matesPorDiaList.add(p);
+                }
 
-                    if (matesPorDiaList.size() > 0){
-                        String fecha = matesPorDiaList.get(matesPorDiaList.size()-1).getFecha();
-                        int mates = matesPorDiaList.get(matesPorDiaList.size()-1).getMates();
-                        String id = matesPorDiaList.get(matesPorDiaList.size()-1).getId();
-                        int azucar = matesPorDiaList.get(matesPorDiaList.size()-1).getAzucar();
-
-                        ultimoMate = new MatesPorDia(id, fecha, mates, azucar);
-                    }
+                if (matesPorDiaList.size() > 0){
+                    ultimoMate = MatesPorDia.obtenerUltimoMateTomado(matesPorDiaList);
                 }
             }
 

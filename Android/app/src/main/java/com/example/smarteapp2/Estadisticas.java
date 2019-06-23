@@ -45,7 +45,7 @@ public class Estadisticas extends AppCompatActivity {
     ProgressBar progressAgua,
                 progressAzucar;
 
-    MatesPorDia ultimoMate;
+    MatesPorDia ultimoMate = new MatesPorDia();
 
     updateStats estadisticas;
 
@@ -57,8 +57,6 @@ public class Estadisticas extends AppCompatActivity {
     long cantidadDeDias;
     float promedioDeMatesPorDia;
     float promedioDeAzucarPorMate;
-
-    int matesDelDia = 0;
 
     List<MatesPorDia> matesPorDiaList = new ArrayList<MatesPorDia>();
 
@@ -121,11 +119,7 @@ public class Estadisticas extends AppCompatActivity {
 
                     if (cantidadDeDias > 0){
                         //region Obtener datos del ultimo dia que se tomo mate
-                        String fecha = matesPorDiaList.get(matesPorDiaList.size()-1).getFecha();
-                        int mates = matesPorDiaList.get(matesPorDiaList.size()-1).getMates();
-                        String id = matesPorDiaList.get(matesPorDiaList.size()-1).getId();
-                        int azucar = matesPorDiaList.get(matesPorDiaList.size()-1).getAzucar();
-                        ultimoMate = new MatesPorDia(id, fecha, mates, azucar);
+                        ultimoMate = MatesPorDia.obtenerUltimoMateTomado(matesPorDiaList);
                         //endregion
 
                         //region Seteo de progresos diarios
@@ -195,30 +189,6 @@ public class Estadisticas extends AppCompatActivity {
 
                         maximaCantidad.setText(maximoMatePorDia.toString());
                         //endregion
-                    }
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                }
-            });
-            //endregion
-
-            //region Escucho la variable bomba de firebase
-            databaseReference.child("bomba").addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    for (DataSnapshot objSnapShot : dataSnapshot.getChildren()){
-                        MatesPorDia p = new MatesPorDia(objSnapShot.getValue(MatesPorDia.class));
-                        if(ultimoMate != null && ultimoMate.getFecha() == fechaDeHoy){
-                            MatesPorDia mate = new MatesPorDia(ultimoMate.getId(), ultimoMate.getFecha(), ultimoMate.getMates()+1, ultimoMate.getAzucar());
-                            databaseReference.child("MatesPorDia").child(mate.getId()).setValue(mate);
-                        }
-                        else{
-                            MatesPorDia mate = new MatesPorDia(fechaDeHoy, fechaDeHoy, 1, 0);
-                            databaseReference.child("MatesPorDia").child(mate.getId()).setValue(mate);
-                        }
                     }
                 }
 

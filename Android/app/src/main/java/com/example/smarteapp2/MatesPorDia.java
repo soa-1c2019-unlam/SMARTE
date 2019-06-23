@@ -1,7 +1,9 @@
 package com.example.smarteapp2;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.List;
 
 public class MatesPorDia {
     String id;
@@ -10,7 +12,6 @@ public class MatesPorDia {
     int mates;
 
     public MatesPorDia(){
-
     }
 
     public MatesPorDia(MatesPorDia matesPorDia){
@@ -64,6 +65,22 @@ public class MatesPorDia {
         if (mates == 1)
             return mates + " mate el día " + dia + "/" + mes + "/" + anio;
         return mates + " mates el día " + dia + "/" + mes + "/" + anio;
+    }
+
+    /**
+     * metodo que devuelve el ultimo registro de mates tomados, con sus respectivas cantidades.
+     * @param matesPorDiaList lista de fechas en firebase
+     * @return la ultima fecha que se tomo mate con sus respectivas cantidades.
+     */
+    public static MatesPorDia obtenerUltimoMateTomado(List<MatesPorDia> matesPorDiaList){
+        String fecha = matesPorDiaList.get(matesPorDiaList.size()-1).getFecha();
+        int mates = matesPorDiaList.get(matesPorDiaList.size()-1).getMates();
+        String id = matesPorDiaList.get(matesPorDiaList.size()-1).getId();
+        int azucar = matesPorDiaList.get(matesPorDiaList.size()-1).getAzucar();
+
+        MatesPorDia ultimoMate = new MatesPorDia(id, fecha, mates, azucar);
+
+        return ultimoMate;
     }
 }
 

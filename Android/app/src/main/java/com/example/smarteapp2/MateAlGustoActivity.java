@@ -39,7 +39,7 @@ public class MateAlGustoActivity extends AppCompatActivity implements SensorEven
            botonCalentarAgua;
 
     List<MatesPorDia> matesPorDiaList = new ArrayList<MatesPorDia>();
-    MatesPorDia ultimoMate;
+    MatesPorDia ultimoMate = new MatesPorDia();
     boolean matePuesto = true;
     String fechaDeHoy;
     fechasEnBase fechasMate;
@@ -99,21 +99,7 @@ public class MateAlGustoActivity extends AppCompatActivity implements SensorEven
         botonAgua.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                databaseReference.child("funcionaConMicrofono").setValue(0);
-                if (matePuesto){
-                    databaseReference.child("bomba").setValue(1);
-                    if(ultimoMate != null && Integer.parseInt(ultimoMate.getFecha()) == Integer.parseInt(fechaDeHoy)){
-                        MatesPorDia mate = new MatesPorDia(ultimoMate.getId(), ultimoMate.getFecha(), ultimoMate.getMates()+1, ultimoMate.getAzucar());
-                        databaseReference.child("MatesPorDia").child(mate.getId()).setValue(mate);
-                    }
-                    else{
-                        MatesPorDia mate = new MatesPorDia(fechaDeHoy, fechaDeHoy, 1, 0);
-                        databaseReference.child("MatesPorDia").child(mate.getId()).setValue(mate);
-                    }
-                }
-                else{
-                    Toast.makeText(getApplicationContext(),"No hay mate colocado", Toast.LENGTH_LONG).show();
-                }
+                databaseReference.child("bomba").setValue(1);
             }
         });
         //endregion
@@ -229,14 +215,10 @@ public class MateAlGustoActivity extends AppCompatActivity implements SensorEven
                 for (DataSnapshot objSnapShot : dataSnapshot.getChildren()){
                     MatesPorDia p = new MatesPorDia(objSnapShot.getValue(MatesPorDia.class));
                     matesPorDiaList.add(p);
+                }
 
-                    if (matesPorDiaList.size() > 0){
-                        String fecha = matesPorDiaList.get(matesPorDiaList.size()-1).getFecha();
-                        int mates = matesPorDiaList.get(matesPorDiaList.size()-1).getMates();
-                        String id = matesPorDiaList.get(matesPorDiaList.size()-1).getId();
-                        int azucar = matesPorDiaList.get(matesPorDiaList.size()-1).getAzucar();
-                        ultimoMate = new MatesPorDia(id, fecha, mates, azucar);
-                    }
+                if (matesPorDiaList.size() > 0){
+                    ultimoMate = MatesPorDia.obtenerUltimoMateTomado(matesPorDiaList);
                 }
             }
 
@@ -281,15 +263,10 @@ public class MateAlGustoActivity extends AppCompatActivity implements SensorEven
                     for (DataSnapshot objSnapShot : dataSnapshot.getChildren()){
                         MatesPorDia p = new MatesPorDia(objSnapShot.getValue(MatesPorDia.class));
                         matesPorDiaList.add(p);
+                    }
 
-                        if (matesPorDiaList.size() > 0){
-                            String fecha = matesPorDiaList.get(matesPorDiaList.size()-1).getFecha();
-                            int mates = matesPorDiaList.get(matesPorDiaList.size()-1).getMates();
-                            String id = matesPorDiaList.get(matesPorDiaList.size()-1).getId();
-                            int azucar = matesPorDiaList.get(matesPorDiaList.size()-1).getAzucar();
-
-                            ultimoMate = new MatesPorDia(id, fecha, mates, azucar);
-                        }
+                    if (matesPorDiaList.size() > 0){
+                        ultimoMate = MatesPorDia.obtenerUltimoMateTomado(matesPorDiaList);
                     }
                 }
 

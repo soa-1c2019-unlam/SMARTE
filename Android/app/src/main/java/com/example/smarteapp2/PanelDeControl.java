@@ -1,6 +1,8 @@
 package com.example.smarteapp2;
 
 
+import android.app.ActivityManager;
+import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -46,29 +48,6 @@ public class PanelDeControl extends AppCompatActivity {
 
 
     private void updatePanel() {
-        databaseReference.child("temperatura").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                TextView txtViewTemperatura = findViewById(R.id.temperaturaTxtView);
-                Long temp = (Long)dataSnapshot.getValue();
-
-                if (temp < 20)
-                    txtViewTemperatura.setTextColor(Color.BLUE);
-                else if (temp >= 20 && temp < 60)
-                    txtViewTemperatura.setTextColor(Color.parseColor("#E5A62A"));
-                else if (temp >=60 && temp <=85 )
-                    txtViewTemperatura.setTextColor(Color.GREEN);
-                else
-                    txtViewTemperatura.setTextColor(Color.RED);
-
-                txtViewTemperatura.setText(temp.toString());
-        }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
 
         databaseReference.child("matePuesto").addValueEventListener(new ValueEventListener() {
             @Override
@@ -90,7 +69,7 @@ public class PanelDeControl extends AppCompatActivity {
             }
         });
 
-        databaseReference.child("ledCalentandoPWM").addValueEventListener(new ValueEventListener() {
+        databaseReference.child("termometro").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 TextView txtViewCalentador = findViewById(R.id.calentadorTxtView);
@@ -109,7 +88,26 @@ public class PanelDeControl extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError databaseError) {
             }
         });
+
+        TextView textViewService = findViewById(R.id.ultimoMateTxtViewServiceBomba);
+        if (isMyServiceRunning(BombaService.class)){
+            textViewService.setTextColor(Color.GREEN);
+            textViewService.setText("Service corriendo");
+        }
+        else{
+            textViewService.setTextColor(Color.RED);
+            textViewService.setText("Service detenido");
+        }
     }
 
+    private boolean isMyServiceRunning(Class<?> serviceClass) {
+        ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
+            if (serviceClass.getName().equals(service.service.getClassName())) {
+                return true;
+            }
+        }
+        return false;
+    }
 
 }

@@ -19,6 +19,7 @@
         <activity android:name=".CustomListAdaptar" />
         <activity android:name=".CustomListView" />
         <activity android:name=".IniciarPerfiles" />
+        <service android:name=".BombaService"></service>
         <activity android:name=".ProgramarHorarios" />
         <activity
             android:name=".ConfigurarPerfiles"

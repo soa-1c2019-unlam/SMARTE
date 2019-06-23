@@ -13,6 +13,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //region Inicio Service de monitoreo de bomba
+        Intent msgIntent = new Intent(MainActivity.this, BombaService.class);
+        startService(msgIntent);
+        //endregion
+
         //region Si click en boton iniciar
         Button btnIniciar = findViewById(R.id.iniciarButton);
         btnIniciar.setOnClickListener(new View.OnClickListener() {
