@@ -72,17 +72,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:text="Aplauso Detectado"
+            android:text="Servo Azucar"
             android:textSize="24sp"
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/aplausoTxtView"
+            android:id="@+id/servoAzucarTxtView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:gravity="center"
-            android:text="N/A"
+            android:text="Apagado"
             android:textColor="@android:color/holo_red_light"
             android:textSize="24sp"
             android:textStyle="bold" />
@@ -92,17 +92,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:text="Ultimo Mate Cebado"
+            android:text="Servo Yerba"
             android:textSize="24sp"
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/ultimoMateTxtView"
+            android:id="@+id/servoYerbaTxtView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:gravity="center"
-            android:text="No Encontrado"
+            android:text="Apagado"
             android:textColor="@android:color/holo_red_light"
             android:textSize="24sp"
             android:textStyle="bold" />

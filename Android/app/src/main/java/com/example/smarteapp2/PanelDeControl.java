@@ -36,6 +36,7 @@ public class PanelDeControl extends AppCompatActivity {
         databaseReference = firebase.getDatabaseReference();
         //endregion
 
+        updatePanel();
 
         Button btnUpdate = findViewById(R.id.updateBtn);
         btnUpdate.setOnClickListener(new View.OnClickListener() {
@@ -46,15 +47,14 @@ public class PanelDeControl extends AppCompatActivity {
         });
     }
 
-
+    
     private void updatePanel() {
 
         databaseReference.child("matePuesto").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                TextView txtViewUltrasonido = findViewById(R.id.ultrasonidoTxtView);
                 Long matePuesto = (Long)dataSnapshot.getValue();
-
+                TextView txtViewUltrasonido = findViewById(R.id.ultrasonidoTxtView);
                 if (matePuesto != 1) {
                     txtViewUltrasonido.setText("Mate no Encontrado");
                     txtViewUltrasonido.setTextColor(Color.RED);
@@ -63,7 +63,6 @@ public class PanelDeControl extends AppCompatActivity {
                     txtViewUltrasonido.setText("Mate Encontrado");
                 }
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
             }
@@ -84,6 +83,42 @@ public class PanelDeControl extends AppCompatActivity {
                 }
             }
 
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+            }
+        });
+
+        databaseReference.child("servoAzucar").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Long servoAzucarActivado = (Long)dataSnapshot.getValue();
+                TextView txtViewServoAzucar = findViewById(R.id.servoAzucarTxtView);
+                if (servoAzucarActivado != 1) {
+                    txtViewServoAzucar.setText("No solicitado");
+                    txtViewServoAzucar.setTextColor(Color.RED);
+                } else{
+                    txtViewServoAzucar.setTextColor(Color.GREEN);
+                    txtViewServoAzucar.setText("Azucar Solicitada");
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+            }
+        });
+
+        databaseReference.child("servoYerba").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Long servoYerba = (Long)dataSnapshot.getValue();
+                TextView txtViewServoYerba = findViewById(R.id.servoYerbaTxtView);
+                if (servoYerba != 1) {
+                    txtViewServoYerba.setText("No solicitado");
+                    txtViewServoYerba.setTextColor(Color.RED);
+                } else{
+                    txtViewServoYerba.setTextColor(Color.GREEN);
+                    txtViewServoYerba.setText("Yerba Solicitada");
+                }
+            }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
             }
