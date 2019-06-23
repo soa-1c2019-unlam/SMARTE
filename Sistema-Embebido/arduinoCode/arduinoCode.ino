@@ -218,6 +218,7 @@ void atenderBombaAplauso(){
       stateAplauso= true;
       yaAbri = false;
       bombaAplauso = false;
+      esp.println("bombaAplauso/OFF");
       Serial.println("Apago Bomba");
     }
     

@@ -29,6 +29,10 @@ void setup()
   Serial.print("connected: ");
   Serial.println(WiFi.localIP());
   Firebase.begin(FIREBASE_HOST, FIREBASE_AUTH);
+
+  Firebase.setInt("servoYerba",0);
+  Firebase.setInt("servoAzucar",0);
+  Firebase.setInt("bomba",0);
   
 }
 
@@ -73,6 +77,9 @@ void loop()
   else if(txt.indexOf("termometro/OFF")>-1){
     Firebase.setInt("termometro",0);
     termoSent = false;
+  }
+  else if(txt.indexOf("bombaAplauso/OFF")>-1){
+    Firebase.setInt("bombaAplauso",1);
   }
   else if(txt.indexOf("matePuesto/OFF")>-1){
     Firebase.setInt("matePuesto",0);
