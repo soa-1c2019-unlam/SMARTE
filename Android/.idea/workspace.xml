@@ -74,10 +74,18 @@
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_firebase_firebase_measurement_connector_16_0_0_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_firebase_firebase_measurement_connector_16_0_0_aar.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_firebase_firebase_measurement_connector_impl_16_0_1_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_firebase_firebase_measurement_connector_impl_16_0_1_aar.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+<<<<<<< Updated upstream
       <change beforePath="$PROJECT_DIR$/app/app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/app/app.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/smarteapp2/PanelDeControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/smarteapp2/PanelDeControl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_panel_de_control.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_panel_de_control.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/local.properties" beforeDir="false" afterPath="$PROJECT_DIR$/local.properties" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/smarteapp2/IniciarCebador.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/smarteapp2/IniciarCebador.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/smarteapp2/MateAlGustoActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/smarteapp2/MateAlGustoActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Sistema-Embebido/arduinoCode/arduinoCode.ino" beforeDir="false" afterPath="$PROJECT_DIR$/../Sistema-Embebido/arduinoCode/arduinoCode.ino" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Sistema-Embebido/arduinoCode/smarte.h" beforeDir="false" afterPath="$PROJECT_DIR$/../Sistema-Embebido/arduinoCode/smarte.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Sistema-Embebido/espCode/espCode.ino" beforeDir="false" afterPath="$PROJECT_DIR$/../Sistema-Embebido/espCode/espCode.ino" afterDir="false" />
+>>>>>>> Stashed changes
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -124,6 +132,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+<<<<<<< Updated upstream
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/smarteapp2/PanelDeControl.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -133,6 +142,42 @@
                 <element signature="imports" expanded="true" />
                 <element signature="e#1471#1472#0" expanded="true" />
                 <element signature="e#1516#1517#0" expanded="true" />
+=======
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/smarteapp2/MainActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="330">
+              <caret line="25" column="68" selection-start-line="25" selection-start-column="68" selection-end-line="25" selection-end-column="68" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#423#468#0" />
+                <element signature="e#1025#1060#0" />
+                <element signature="e#1451#1494#0" />
+                <element signature="e#1891#1930#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/smarteapp2/IniciarCebador.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="300">
+              <caret line="24" column="19" selection-start-line="24" selection-start-column="19" selection-end-line="24" selection-end-column="19" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/smarteapp2/BombaService.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1873">
+              <caret line="134" column="44" selection-start-line="134" selection-start-column="44" selection-end-line="134" selection-end-column="44" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#4305#4306#0" expanded="true" />
+                <element signature="e#4332#4333#0" expanded="true" />
+>>>>>>> Stashed changes
               </folding>
             </state>
           </provider>
@@ -144,6 +189,30 @@
           <provider editor-type-id="text-editor">
             <state relative-caret-position="1717">
               <caret line="101" column="39" selection-start-line="101" selection-start-column="39" selection-end-line="101" selection-end-column="39" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/smarteapp2/MateAlGustoActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1635">
+              <caret line="254" column="38" selection-start-line="254" selection-start-column="38" selection-end-line="254" selection-end-column="38" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#2152#2181#0" />
+                <element signature="e#3475#3476#0" expanded="true" />
+                <element signature="e#3551#3552#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/smarteapp2/Perfil.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="495">
+              <caret line="45" selection-start-line="45" selection-end-line="45" />
             </state>
           </provider>
         </entry>
@@ -177,9 +246,13 @@
       <find>matesPorDiaList</find>
       <find>ultimoMate</find>
       <find>workerThread</find>
+      <find>listarDatos</find>
+      <find>verificarMate</find>
     </findStrings>
     <replaceStrings>
       <replace>hiloBackground</replace>
+      <replace>verificarMate</replace>
+      <replace>listarDatos</replace>
     </replaceStrings>
   </component>
   <component name="GenerateSignedApkSettings">
@@ -217,7 +290,6 @@
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_mate_al_gusto.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_configurar_perfiles.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/smarteapp2/IniciarCebador.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/smarteapp2/AsynTaskBackground.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/smarteapp2/Background.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_estadisticas.xml" />
@@ -226,12 +298,20 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/smarteapp2/Perfil.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/smarteapp2/MatesPorDia.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/smarteapp2/IniciarPerfiles.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/smarteapp2/MateAlGustoActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
+<<<<<<< Updated upstream
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/smarteapp2/Estadisticas.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/smarteapp2/BombaService.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_panel_de_control.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/smarteapp2/PanelDeControl.java" />
+=======
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_panel_de_control.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/smarteapp2/PanelDeControl.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/smarteapp2/BombaService.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/smarteapp2/Estadisticas.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/smarteapp2/MateAlGustoActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/smarteapp2/IniciarCebador.java" />
+>>>>>>> Stashed changes
       </list>
     </option>
   </component>
@@ -247,18 +327,18 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+<<<<<<< Updated upstream
       <pane id="ProjectPane" />
+=======
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
+>>>>>>> Stashed changes
       <pane id="AndroidView">
         <subPane>
           <expand>
             <path>
               <item name="Android" type="1abcf292:AndroidViewProjectNode" />
               <item name="app" type="feadf853:AndroidModuleNode" />
-            </path>
-            <path>
-              <item name="Android" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="manifests" type="f94875db:AndroidManifestsGroupNode" />
             </path>
             <path>
               <item name="Android" type="1abcf292:AndroidViewProjectNode" />
@@ -287,6 +367,7 @@
               <item name="res" type="d4f16f75:AndroidResFolderNode" />
               <item name="layout" type="ddeffd01:AndroidResFolderTypeNode" />
             </path>
+<<<<<<< Updated upstream
             <path>
               <item name="Android" type="1abcf292:AndroidViewProjectNode" />
               <item name="app" type="feadf853:AndroidModuleNode" />
@@ -297,12 +378,18 @@
               <item name="Android" type="1abcf292:AndroidViewProjectNode" />
               <item name="Gradle Scripts" type="ae0cef3a:AndroidBuildScriptsGroupNode" />
             </path>
+=======
+>>>>>>> Stashed changes
           </expand>
           <select />
         </subPane>
       </pane>
+<<<<<<< Updated upstream
       <pane id="Scope" />
       <pane id="PackagesPane" />
+=======
+      <pane id="ProjectPane" />
+>>>>>>> Stashed changes
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -463,7 +550,11 @@
       <window_info id="Build Variants" order="4" sideWeight="0.50406504" side_tool="true" weight="0.26096824" />
       <window_info id="Capture Tool" order="5" />
       <window_info id="Resources Explorer" order="6" weight="0.32980332" />
+<<<<<<< Updated upstream
       <window_info content_ui="combo" id="Project" order="7" sideWeight="0.49593496" visible="true" weight="0.2633997" />
+=======
+      <window_info active="true" content_ui="combo" id="Project" order="7" sideWeight="0.49593496" visible="true" weight="0.2609047" />
+>>>>>>> Stashed changes
       <window_info id="Captures" order="8" sideWeight="0.50406504" side_tool="true" weight="0.26096824" />
       <window_info anchor="bottom" id="Logcat" order="0" sideWeight="0.4927302" weight="0.2503937" />
       <window_info anchor="bottom" id="TODO" order="1" sideWeight="0.49676898" weight="0.32598424" />
@@ -471,7 +562,11 @@
       <window_info anchor="bottom" id="Terminal" order="3" sideWeight="0.4983845" weight="0.32598424" />
       <window_info anchor="bottom" id="Version Control" order="4" sideWeight="0.49919224" weight="0.32876712" />
       <window_info anchor="bottom" id="Event Log" order="5" sideWeight="0.5072698" side_tool="true" weight="0.21506849" />
+<<<<<<< Updated upstream
       <window_info active="true" anchor="bottom" id="Build" order="6" sideWeight="0.7875606" visible="true" weight="0.33228347" />
+=======
+      <window_info anchor="bottom" id="Build" order="6" sideWeight="0.7875606" weight="0.30273974" />
+>>>>>>> Stashed changes
       <window_info anchor="bottom" id="Find" order="7" />
       <window_info anchor="bottom" id="Run" order="8" sideWeight="0.4951535" weight="0.2931507" />
       <window_info anchor="bottom" x="0" y="23" width="1280" height="777" id="Android Profiler" order="9" sideWeight="0.4983845" type="FLOATING" weight="0.54383564" />
@@ -607,7 +702,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/8adf968f73356d0f6f7d285a3ee8aba1/jars/classes.jar!/android/support/v7/app/AppCompatActivity.class" />
     <entry file="file://$PROJECT_DIR$/app/src/test/java/com/example/smarteapp2/ExampleUnitTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
@@ -710,6 +804,18 @@
           <caret line="40" column="40" selection-start-line="40" selection-start-column="40" selection-end-line="40" selection-end-column="40" />
         </state>
       </provider>
+<<<<<<< Updated upstream
+=======
+      <provider editor-type-id="android-designer2" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_mate_al_gusto.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="523">
+          <caret line="54" column="39" selection-start-line="54" selection-start-column="39" selection-end-line="54" selection-end-column="39" />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2" />
+>>>>>>> Stashed changes
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/smarteapp2/AsynTaskBackground.java" />
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/smarteapp2/Background.java" />
@@ -721,6 +827,7 @@
         </state>
       </provider>
     </entry>
+<<<<<<< Updated upstream
     <entry file="file://$USER_HOME$/Library/Android/sdk/sources/android-28/android/widget/TextView.java" />
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/smarteapp2/InicializarFirebase.java" />
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/smarteapp2/IniciarCebador.java">
@@ -734,6 +841,8 @@
         </state>
       </provider>
     </entry>
+=======
+>>>>>>> Stashed changes
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_estadisticas.xml">
       <provider selected="true" editor-type-id="android-designer2" />
       <provider editor-type-id="text-editor">
@@ -741,6 +850,7 @@
           <caret line="77" selection-start-line="77" selection-end-line="77" />
         </state>
       </provider>
+<<<<<<< Updated upstream
     </entry>
     <entry file="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/192bbec0c8eb78817d9ed6baa821a603/jars/classes.jar!/com/google/firebase/database/core/view/DataEvent.class" />
     <entry file="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/192bbec0c8eb78817d9ed6baa821a603/jars/classes.jar!/com/google/firebase/database/core/view/EventRaiser.class" />
@@ -760,6 +870,45 @@
     <entry file="file://$USER_HOME$/Library/Android/sdk/sources/android-28/android/app/ActivityThread.java" />
     <entry file="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/192bbec0c8eb78817d9ed6baa821a603/jars/classes.jar!/com/google/firebase/database/ValueEventListener.class" />
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/smarteapp2/MateAlGustoActivity.java">
+=======
+      <provider selected="true" editor-type-id="android-designer2" />
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/192bbec0c8eb78817d9ed6baa821a603/jars/classes.jar!/com/google/firebase/database/core/view/DataEvent.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="44" selection-start-line="44" selection-end-line="44" />
+          <folding>
+            <element signature="e#1289#1290#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/192bbec0c8eb78817d9ed6baa821a603/jars/classes.jar!/com/google/firebase/database/core/view/EventRaiser.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="127">
+          <caret line="32" selection-start-line="32" selection-end-line="32" />
+          <folding>
+            <element signature="e#0#1406#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/192bbec0c8eb78817d9ed6baa821a603/jars/classes.jar!/com/google/firebase/database/core/ValueEventRegistration.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="117">
+          <caret line="54" selection-start-line="54" selection-end-line="54" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Library/Android/sdk/sources/android-28/android/content/Intent.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="141">
+          <caret line="6082" selection-start-line="6082" selection-end-line="6082" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Library/Android/sdk/sources/android-28/android/content/ContextWrapper.java">
+>>>>>>> Stashed changes
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-5">
           <caret line="220" column="42" selection-start-line="220" selection-start-column="42" selection-end-line="220" selection-end-column="42" />
@@ -769,6 +918,7 @@
         </state>
       </provider>
     </entry>
+<<<<<<< Updated upstream
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/smarteapp2/IniciarPerfiles.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-6">
@@ -782,6 +932,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/smarteapp2/BombaService.java" />
     <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+=======
+    <entry file="file://$USER_HOME$/Library/Android/sdk/sources/android-28/android/app/ActivityThread.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="336">
+          <caret line="3546" selection-start-line="3546" selection-end-line="3546" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/192bbec0c8eb78817d9ed6baa821a603/jars/classes.jar!/com/google/firebase/database/ValueEventListener.class">
+>>>>>>> Stashed changes
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="298">
           <caret line="23" column="16" selection-start-line="23" selection-start-column="16" selection-end-line="23" selection-end-column="16" />
@@ -789,6 +949,7 @@
       </provider>
       <provider editor-type-id="android-manifest" />
     </entry>
+<<<<<<< Updated upstream
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_mate_al_gusto.xml">
       <provider editor-type-id="android-designer2" />
       <provider selected="true" editor-type-id="text-editor">
@@ -798,6 +959,9 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/smarteapp2/TimePickerFragment.java">
+=======
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_panel_de_control.xml">
+>>>>>>> Stashed changes
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="272">
           <caret line="34" lean-forward="true" selection-start-line="34" selection-end-line="34" />
@@ -807,6 +971,7 @@
         </state>
       </provider>
     </entry>
+<<<<<<< Updated upstream
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/smarteapp2/Estadisticas.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1185">
@@ -818,15 +983,68 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
           <caret line="8" column="20" selection-start-line="8" selection-start-column="20" selection-end-line="8" selection-end-column="20" />
+=======
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/smarteapp2/IniciarPerfiles.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-6">
+          <caret line="109" column="66" selection-start-line="109" selection-start-column="66" selection-end-line="109" selection-end-column="66" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1293#1306#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/smarteapp2/MainActivity.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/smarteapp2/PanelDeControl.java">
       <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-269">
+          <caret line="43" column="27" selection-start-line="43" selection-start-column="16" selection-end-line="43" selection-end-column="27" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+>>>>>>> Stashed changes
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/smarteapp2/Estadisticas.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="146">
+          <caret line="102" column="47" selection-start-line="102" selection-start-column="38" selection-end-line="102" selection-end-column="47" />
+          <folding>
+            <element signature="e#2778#2807#0" />
+            <element signature="e#4203#4257#0" />
+            <element signature="e#4410#4445#0" />
+            <element signature="e#6888#6927#0" />
+            <element signature="e#7667#7709#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/smarteapp2/MatesPorDia.java">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< Updated upstream
         <state relative-caret-position="425">
           <caret line="25" column="61" selection-start-line="25" selection-start-column="61" selection-end-line="25" selection-end-column="61" />
           <folding>
             <element signature="imports" expanded="true" />
+=======
+        <state relative-caret-position="431">
+          <caret line="72" column="37" selection-start-line="72" selection-start-column="35" selection-end-line="72" selection-end-column="37" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/smarteapp2/BombaService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1873">
+          <caret line="134" column="44" selection-start-line="134" selection-start-column="44" selection-end-line="134" selection-end-column="44" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#4305#4306#0" expanded="true" />
+            <element signature="e#4332#4333#0" expanded="true" />
+>>>>>>> Stashed changes
           </folding>
         </state>
       </provider>
@@ -839,6 +1057,7 @@
         </state>
       </provider>
     </entry>
+<<<<<<< Updated upstream
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/smarteapp2/PanelDeControl.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
@@ -847,7 +1066,60 @@
             <element signature="imports" expanded="true" />
             <element signature="e#1471#1472#0" expanded="true" />
             <element signature="e#1516#1517#0" expanded="true" />
+=======
+    <entry file="file://$USER_HOME$/Library/Android/sdk/sources/android-28/android/hardware/Sensor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="235">
+          <caret line="33" column="19" selection-start-line="33" selection-start-column="19" selection-end-line="33" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/smarteapp2/TimePickerFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="34" lean-forward="true" selection-start-line="34" selection-end-line="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/smarteapp2/MateAlGustoActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1635">
+          <caret line="254" column="38" selection-start-line="254" selection-start-column="38" selection-end-line="254" selection-end-column="38" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#2152#2181#0" />
+            <element signature="e#3475#3476#0" expanded="true" />
+            <element signature="e#3551#3552#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/smarteapp2/Perfil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="495">
+          <caret line="45" selection-start-line="45" selection-end-line="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/smarteapp2/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="25" column="68" selection-start-line="25" selection-start-column="68" selection-end-line="25" selection-end-column="68" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#423#468#0" />
+            <element signature="e#1025#1060#0" />
+            <element signature="e#1451#1494#0" />
+            <element signature="e#1891#1930#0" />
+>>>>>>> Stashed changes
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/smarteapp2/IniciarCebador.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="24" column="19" selection-start-line="24" selection-start-column="19" selection-end-line="24" selection-end-column="19" />
         </state>
       </provider>
     </entry>

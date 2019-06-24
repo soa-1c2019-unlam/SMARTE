@@ -85,7 +85,7 @@ bool stateTerm = true;
 dht DHT;
 const int pwmLed = 5;
 int nivelLed;
-const int maxTemp = 45;
+const int maxTemp = 60;
 const int minTemp = 15;
 float tempActual;
 const int tempLed = 4;

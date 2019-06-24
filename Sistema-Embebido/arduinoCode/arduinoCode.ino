@@ -233,9 +233,9 @@ void atenderBombaAplauso(){
 void atenderTermometro(){
   DHT.read11(dht_apin);
   tempActual = DHT.temperature;
-  
+
   if(firstTemp){
-    iniTemp = tempActual-1;
+    iniTemp = tempActual;
     Serial.print("Primer temp: ");
     Serial.println(iniTemp);
     
@@ -263,10 +263,9 @@ void atenderTermometro(){
 }
 
 int parseTemp(float temp){
-  float value = maxTemp;
+  float value = maxTemp - minTemp;
   float aux;
-  value = value - temp;
-  aux = (-1)*(((value*200)/iniTemp)-200);
+  aux = ((((temp-minTemp)*200)/value));
   Serial.println(aux);
   
   return (int) aux;

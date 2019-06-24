@@ -20,6 +20,7 @@ bool termoSent = false;
 void setup()
 {
   Serial.begin(9600);
+   Serial.print("empezando la conexion");
   WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
   Serial.print("connecting");
   
