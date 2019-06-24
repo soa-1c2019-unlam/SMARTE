@@ -108,14 +108,12 @@ public class MateAlGustoActivity extends AppCompatActivity implements SensorEven
         botonYerba.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                databaseReference.child("funcionaConMicrofono").setValue(0);
                 if(matePuesto){
                     databaseReference.child("servoYerba").setValue(1);
                 }
                 else{
                     Toast.makeText(getApplicationContext(),"No hay mate colocado", Toast.LENGTH_LONG).show();
                 }
-
             }
         });
         //endregion
@@ -124,7 +122,6 @@ public class MateAlGustoActivity extends AppCompatActivity implements SensorEven
         botonAzucar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                databaseReference.child("funcionaConMicrofono").setValue(0);
                 if (matePuesto){
                     databaseReference.child("servoAzucar").setValue(1);
                     databaseReference.child("cantAzucar").setValue(1);
@@ -143,7 +140,7 @@ public class MateAlGustoActivity extends AppCompatActivity implements SensorEven
             @Override
             public void onClick(View v) {
                 databaseReference.child("termometro").setValue(1);
-                Toast.makeText(getApplicationContext(),"Calentando agua", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),"Calentando agua...", Toast.LENGTH_LONG).show();
             }
         });
         //endregion
@@ -162,20 +159,19 @@ public class MateAlGustoActivity extends AppCompatActivity implements SensorEven
             shake = shake * 0.9f + delta;
 
             if (shake > 50) {
-
                 botonAgua.callOnClick();
             }
         }
 
         if (sensorEvent.sensor.getName() == sensorProx.getName())
         {
-            if(sensorEvent.values[0] == 0);
-            botonYerba.callOnClick();
+            if(sensorEvent.values[0] == 0){
+                botonYerba.callOnClick();
+            }
         }
 
         if (sensorEvent.sensor.getName() == sensorGiros.getName())
         {
-
             if(sensorEvent.values[1] < -3f)
             {
                 botonAzucar.callOnClick();
@@ -185,7 +181,6 @@ public class MateAlGustoActivity extends AppCompatActivity implements SensorEven
 
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
-
     }
 
     private void listarDatos(){
