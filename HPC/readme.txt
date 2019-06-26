@@ -1,1 +1,1 @@
-Archivo para poder crear repo git. (No me permite crearlo vacío)..
+Carpeta utilizada para entrega de TP3 - HPC
