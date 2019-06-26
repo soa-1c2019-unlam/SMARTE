@@ -158,10 +158,10 @@ public class Estadisticas extends AppCompatActivity {
                         }
                         else{
                             progressAgua.setProgress(0);
-                            porcentajeAzucar.setText(0);
-                            porcentajeAgua.setText(0);
+                            porcentajeAzucar.setText(String.valueOf(0));
+                            porcentajeAgua.setText(String.valueOf(0));
                             progressAzucar.setProgress(0);
-                            matesEnElDia.setText(0);
+                            matesEnElDia.setText(String.valueOf( 0));
                         }
                         //endregion
 
