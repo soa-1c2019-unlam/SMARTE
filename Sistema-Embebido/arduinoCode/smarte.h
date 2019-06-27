@@ -74,7 +74,7 @@ const long delayWaitSound = 50;
 bool primerClap = true;
 bool bombaAplauso= false;
 bool stateAplauso= true;
-const long umbralSonido = 350;
+const long umbralSonido = 900;
 
 
 /////////Variables Termometro/////////
@@ -85,7 +85,7 @@ bool stateTerm = true;
 dht DHT;
 const int pwmLed = 5;
 int nivelLed;
-const int maxTemp = 60;
+const int maxTemp = 45;
 const int minTemp = 15;
 float tempActual;
 const int tempLed = 4;

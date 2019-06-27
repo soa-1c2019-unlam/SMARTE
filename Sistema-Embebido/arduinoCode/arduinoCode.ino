@@ -21,7 +21,7 @@ void setup() {
 void loop() {
 
   //Deteccion de aplauso
-  soundValue = analogRead(soundSensor );
+  soundValue = analogRead(soundSensor);
   if(soundValue > umbralSonido){
     Serial.println(soundValue);
     if(primerClap){
@@ -56,6 +56,10 @@ void loop() {
     atenderYerba();
   }
   if(data.indexOf("servoAzucar/")>-1 || !stateAz || seguirMidiendoAz){
+    Serial.print("State Azucar: ");
+    Serial.println(stateAz);
+    Serial.print("Seguir midiendo Az: ");
+    Serial.println(seguirMidiendoAz);
     if(boolCantAz){
       //Obtengo cantidad de azucar
       cantAzucar = data.substring(12,13).toInt();
@@ -63,7 +67,7 @@ void loop() {
     }
     atenderAzucar();
   }
-  if(data.indexOf("bomba/1")>-1 || !stateBom || seguirMidiendoBom){
+  else if(data.indexOf("bomba/1")>-1 || !stateBom || seguirMidiendoBom){
     Serial.print("Estado Bomba: ");
     Serial.println(stateBom);
     Serial.print("Seguir midiendo bom: ");
@@ -82,10 +86,12 @@ void loop() {
 }
 
 void atenderYerba(){
-
+  Serial.println("Entre a yerba");
   //Checkequeo si ya detecte que estaba cerca el mate
   if(!yaAbri){
     cm = medirDistancia();
+    Serial.print("CM medido: ");
+    Serial.println(cm);
   }
   //Checkequeo distancia del mate
   if((cm <= 10 && cm > 0)){
@@ -116,11 +122,16 @@ void atenderYerba(){
 }
 
 void atenderAzucar(){
+  Serial.println("Entre a yerba");
   if(!yaAbri){
     cm = medirDistancia();
+    Serial.print("CM medido: ");
+    Serial.println(cm);
   }    
   if(cm <= 10 && cm > 0){
     digitalWrite(ledSinMate, LOW);
+    Serial.print("Cant Azucar: ");
+    Serial.println(cantAzucar);
     if(cantAzucar > 0){
       if(stateAz){
         timeAz = millis();
@@ -132,6 +143,7 @@ void atenderAzucar(){
         servoAz.write(0);
         stateAz = true;
         cantAzucar = cantAzucar - 1;
+        yaAbri = false;
       }
     }
     else{
@@ -139,7 +151,6 @@ void atenderAzucar(){
       esp.println("servoAzucar/OFF");
       stateAz = true;
       boolCantAz = true;
-      yaAbri = false;
     }
   }
   else if ( cm != MEDIR_USONIDO){
